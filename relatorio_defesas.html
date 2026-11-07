@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Relatório de Defesas</title>
+<style>
+:root{color-scheme:light;--bg:#fcfcfb;--card:#ffffff;--tx:#0b0b0b;--tx2:#52514e;--grid:#e6e5e1;
+ --line:#dcdad4;--s1:#2a78d6;--s2:#eb6834}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#1a1a19;
+ --card:#222221;--tx:#f0efec;--tx2:#c3c2b7;--grid:#333331;--line:#3a3a38;--s1:#3987e5;--s2:#d95926}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#1a1a19;--card:#222221;--tx:#f0efec;--tx2:#c3c2b7;
+ --grid:#333331;--line:#3a3a38;--s1:#3987e5;--s2:#d95926}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.55 system-ui,"Segoe UI",sans-serif}
+main{max-width:860px;margin:0 auto;padding:32px 16px 64px}
+h1{font-size:26px;margin:0 0 4px}h2{font-size:19px;margin:0 0 12px}h3{font-size:15px;margin:18px 0 8px}
+.sub,.nota{color:var(--tx2);font-size:13px}
+section{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px;margin:16px 0}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:20px 0}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px}
+.tile b{display:block;font-size:26px;font-variant-numeric:tabular-nums}.tile span{color:var(--tx2);font-size:13px}
+.dest li{margin:6px 0}
+.chart{width:100%;height:auto;display:block;font-size:12px}
+.grid{stroke:var(--grid);stroke-width:1}
+.tick,.lbl{fill:var(--tx2)}.val{fill:var(--tx);font-variant-numeric:tabular-nums}
+.s1{fill:var(--s1)}.s2{fill:var(--s2)}path.s1:hover,path.s2:hover{opacity:.8}
+.leg{display:flex;gap:16px;font-size:13px;color:var(--tx2);margin-bottom:6px}
+.leg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.leg i.s1{background:var(--s1)}.leg i.s2{background:var(--s2)}
+.tab{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums;margin:8px 0}
+.tab th,.tab td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left}
+.tab th{color:var(--tx2);font-weight:600}
+details{margin-top:8px}summary{cursor:pointer;color:var(--tx2);font-size:13px}
+code{font-size:12px}
+@media print{section{break-inside:avoid}details{display:block}}
+</style></head><body><main>
+<header>
+  <h1>Defesas de pós-graduação — análise básica</h1>
+  <p class="sub">Fonte: SIGAA/UFBA, página pública de defesas do programa (id 1820) · arquivo <code>defesas_1820.csv</code>
+  · 269 registros, 2017–2026 · gerado em 07/11/2026</p>
+</header>
+
+<div class="tiles"><div class="tile"><b>269</b><span>defesas no total</span></div><div class="tile"><b>200</b><span>dissertações</span></div><div class="tile"><b>69</b><span>teses</span></div><div class="tile"><b>38</b><span>orientadores</span></div><div class="tile"><b>30</b><span>defesas/ano (2018–2026)</span></div></div>
+
+<section>
+<h2>1. Destaques</h2>
+<ul class="dest">
+  <li>O programa registra <b>269</b> defesas: <b>200</b> dissertações
+      (74%) e <b>69</b> teses
+      (26%).</li>
+  <li>O ano com mais defesas foi <b>2020</b> (37). 2017 tem só
+      1 defesa, por isso ficou fora da média anual.
+      As teses aparecem a partir de 2019.</li>
+  <li><b>Dezembro</b> é o mês com mais defesas (56), acompanhando o fim de semestre.</li>
+  <li>Os 5 orientadores mais ativos respondem por <b>32%</b> das defesas;
+      6 dos 38 orientadores aparecem em uma única defesa.</li>
+  <li>Em média, a banca tem <b>3.1</b> membros nas dissertações e
+      <b>5.1</b> nas teses. O orientador consta na banca em
+      99% dos casos.</li>
+  <li><b>17%</b> dos títulos estão em inglês (classificação automática, aproximada).</li>
+</ul>
+</section>
+
+<section>
+<h2>2. Defesas por ano</h2>
+<div class="leg"><span><i class="s1"></i>Dissertações</span><span><i class="s2"></i>Teses</span></div><svg viewBox="0 0 720 280" role="img" class="chart"><line x1="36" x2="710" y1="252.0" y2="252.0" class="grid"/><text x="30" y="256.0" class="tick" text-anchor="end">0</text><line x1="36" x2="710" y1="192.5" y2="192.5" class="grid"/><text x="30" y="196.5" class="tick" text-anchor="end">10</text><line x1="36" x2="710" y1="133.0" y2="133.0" class="grid"/><text x="30" y="137.0" class="tick" text-anchor="end">20</text><line x1="36" x2="710" y1="73.5" y2="73.5" class="grid"/><text x="30" y="77.5" class="tick" text-anchor="end">30</text><line x1="36" x2="710" y1="14.0" y2="14.0" class="grid"/><text x="30" y="18.0" class="tick" text-anchor="end">40</text><path d="M50.7,252.0 V250.1 Q50.7,246.1 54.7,246.1 H84.7 Q88.7,246.1 88.7,250.1 V252.0 Z" class="s1"><title>2017 · Dissertações: 1</title></path><text x="69.7" y="241.1" class="val" text-anchor="middle">1</text><text x="69.7" y="270" class="tick" text-anchor="middle">2017</text><path d="M118.1,252.0 V47.8 Q118.1,43.8 122.1,43.8 H152.1 Q156.1,43.8 156.1,47.8 V252.0 Z" class="s1"><title>2018 · Dissertações: 35</title></path><text x="137.1" y="38.8" class="val" text-anchor="middle">35</text><text x="137.1" y="270" class="tick" text-anchor="middle">2018</text><path d="M185.5,252.0 V109.2 Q185.5,109.2 185.5,109.2 H223.5 Q223.5,109.2 223.5,109.2 V252.0 Z" class="s1"><title>2019 · Dissertações: 24</title></path><path d="M185.5,107.2 V95.4 Q185.5,91.4 189.5,91.4 H219.5 Q223.5,91.4 223.5,95.4 V107.2 Z" class="s2"><title>2019 · Teses: 3</title></path><text x="204.5" y="86.4" class="val" text-anchor="middle">27</text><text x="204.5" y="270" class="tick" text-anchor="middle">2019</text><path d="M252.9,252.0 V91.3 Q252.9,91.3 252.9,91.3 H290.9 Q290.9,91.3 290.9,91.3 V252.0 Z" class="s1"><title>2020 · Dissertações: 27</title></path><path d="M252.9,89.3 V35.8 Q252.9,31.8 256.9,31.8 H286.9 Q290.9,31.8 290.9,35.8 V89.3 Z" class="s2"><title>2020 · Teses: 10</title></path><text x="271.9" y="26.8" class="val" text-anchor="middle">37</text><text x="271.9" y="270" class="tick" text-anchor="middle">2020</text><path d="M320.3,252.0 V138.9 Q320.3,138.9 320.3,138.9 H358.3 Q358.3,138.9 358.3,138.9 V252.0 Z" class="s1"><title>2021 · Dissertações: 19</title></path><path d="M320.3,136.9 V83.4 Q320.3,79.4 324.3,79.4 H354.3 Q358.3,79.4 358.3,83.4 V136.9 Z" class="s2"><title>2021 · Teses: 10</title></path><text x="339.3" y="74.4" class="val" text-anchor="middle">29</text><text x="339.3" y="270" class="tick" text-anchor="middle">2021</text><path d="M387.7,252.0 V127.0 Q387.7,127.0 387.7,127.0 H425.7 Q425.7,127.0 425.7,127.0 V252.0 Z" class="s1"><title>2022 · Dissertações: 21</title></path><path d="M387.7,125.0 V71.5 Q387.7,67.5 391.7,67.5 H421.7 Q425.7,67.5 425.7,71.5 V125.0 Z" class="s2"><title>2022 · Teses: 10</title></path><text x="406.7" y="62.5" class="val" text-anchor="middle">31</text><text x="406.7" y="270" class="tick" text-anchor="middle">2022</text><path d="M455.1,252.0 V109.2 Q455.1,109.2 455.1,109.2 H493.1 Q493.1,109.2 493.1,109.2 V252.0 Z" class="s1"><title>2023 · Dissertações: 24</title></path><path d="M455.1,107.2 V47.8 Q455.1,43.8 459.1,43.8 H489.1 Q493.1,43.8 493.1,47.8 V107.2 Z" class="s2"><title>2023 · Teses: 11</title></path><text x="474.1" y="38.8" class="val" text-anchor="middle">35</text><text x="474.1" y="270" class="tick" text-anchor="middle">2023</text><path d="M522.5,252.0 V174.6 Q522.5,174.6 522.5,174.6 H560.5 Q560.5,174.6 560.5,174.6 V252.0 Z" class="s1"><title>2024 · Dissertações: 13</title></path><path d="M522.5,172.6 V131.0 Q522.5,127.0 526.5,127.0 H556.5 Q560.5,127.0 560.5,131.0 V172.6 Z" class="s2"><title>2024 · Teses: 8</title></path><text x="541.5" y="122.0" class="val" text-anchor="middle">21</text><text x="541.5" y="270" class="tick" text-anchor="middle">2024</text><path d="M589.9,252.0 V138.9 Q589.9,138.9 589.9,138.9 H627.9 Q627.9,138.9 627.9,138.9 V252.0 Z" class="s1"><title>2025 · Dissertações: 19</title></path><path d="M589.9,136.9 V77.5 Q589.9,73.5 593.9,73.5 H623.9 Q627.9,73.5 627.9,77.5 V136.9 Z" class="s2"><title>2025 · Teses: 11</title></path><text x="608.9" y="68.5" class="val" text-anchor="middle">30</text><text x="608.9" y="270" class="tick" text-anchor="middle">2025</text><path d="M657.3,252.0 V150.9 Q657.3,150.9 657.3,150.9 H695.3 Q695.3,150.9 695.3,150.9 V252.0 Z" class="s1"><title>2026 · Dissertações: 17</title></path><path d="M657.3,148.9 V119.2 Q657.3,115.2 661.3,115.2 H691.3 Q695.3,115.2 695.3,119.2 V148.9 Z" class="s2"><title>2026 · Teses: 6</title></path><text x="676.3" y="110.2" class="val" text-anchor="middle">23</text><text x="676.3" y="270" class="tick" text-anchor="middle">2026</text></svg>
+<details><summary>Ver tabela</summary><table class="dataframe tab">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Tipo</th>
+      <th>Ano</th>
+      <th>Dissertações</th>
+      <th>Teses</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th></th>
+      <td>2017</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>2018</td>
+      <td>35</td>
+      <td>0</td>
+      <td>35</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>2019</td>
+      <td>24</td>
+      <td>3</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>2020</td>
+      <td>27</td>
+      <td>10</td>
+      <td>37</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>2021</td>
+      <td>19</td>
+      <td>10</td>
+      <td>29</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>2022</td>
+      <td>21</td>
+      <td>10</td>
+      <td>31</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>2023</td>
+      <td>24</td>
+      <td>11</td>
+      <td>35</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>2024</td>
+      <td>13</td>
+      <td>8</td>
+      <td>21</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>2025</td>
+      <td>19</td>
+      <td>11</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>2026</td>
+      <td>17</td>
+      <td>6</td>
+      <td>23</td>
+    </tr>
+  </tbody>
+</table></details>
+<p class="nota">2026 considera as defesas publicadas até a data da coleta.</p>
+</section>
+
+<section>
+<h2>3. Distribuição por mês</h2>
+<p class="nota">Todos os anos somados, pela data da defesa.</p>
+<div class="leg"><span><i class="s1"></i>Dissertações</span><span><i class="s2"></i>Teses</span></div><svg viewBox="0 0 720 280" role="img" class="chart"><line x1="36" x2="710" y1="252.0" y2="252.0" class="grid"/><text x="30" y="256.0" class="tick" text-anchor="end">0</text><line x1="36" x2="710" y1="212.3" y2="212.3" class="grid"/><text x="30" y="216.3" class="tick" text-anchor="end">10</text><line x1="36" x2="710" y1="172.7" y2="172.7" class="grid"/><text x="30" y="176.7" class="tick" text-anchor="end">20</text><line x1="36" x2="710" y1="133.0" y2="133.0" class="grid"/><text x="30" y="137.0" class="tick" text-anchor="end">30</text><line x1="36" x2="710" y1="93.3" y2="93.3" class="grid"/><text x="30" y="97.3" class="tick" text-anchor="end">40</text><line x1="36" x2="710" y1="53.7" y2="53.7" class="grid"/><text x="30" y="57.7" class="tick" text-anchor="end">50</text><line x1="36" x2="710" y1="14.0" y2="14.0" class="grid"/><text x="30" y="18.0" class="tick" text-anchor="end">60</text><path d="M46.7,252.0 V228.2 Q46.7,228.2 46.7,228.2 H81.5 Q81.5,228.2 81.5,228.2 V252.0 Z" class="s1"><title>Jan · Dissertações: 6</title></path><path d="M46.7,226.2 V220.3 Q46.7,216.3 50.7,216.3 H77.5 Q81.5,216.3 81.5,220.3 V226.2 Z" class="s2"><title>Jan · Teses: 3</title></path><text x="64.1" y="211.3" class="val" text-anchor="middle">9</text><text x="64.1" y="270" class="tick" text-anchor="middle">Jan</text><path d="M102.8,252.0 V228.2 Q102.8,228.2 102.8,228.2 H137.7 Q137.7,228.2 137.7,228.2 V252.0 Z" class="s1"><title>Fev · Dissertações: 6</title></path><path d="M102.8,226.2 V212.4 Q102.8,208.4 106.8,208.4 H133.7 Q137.7,208.4 137.7,212.4 V226.2 Z" class="s2"><title>Fev · Teses: 5</title></path><text x="120.2" y="203.4" class="val" text-anchor="middle">11</text><text x="120.2" y="270" class="tick" text-anchor="middle">Fev</text><path d="M159.0,252.0 V196.5 Q159.0,196.5 159.0,196.5 H193.8 Q193.8,196.5 193.8,196.5 V252.0 Z" class="s1"><title>Mar · Dissertações: 14</title></path><path d="M159.0,194.5 V168.7 Q159.0,164.7 163.0,164.7 H189.8 Q193.8,164.7 193.8,168.7 V194.5 Z" class="s2"><title>Mar · Teses: 8</title></path><text x="176.4" y="159.7" class="val" text-anchor="middle">22</text><text x="176.4" y="270" class="tick" text-anchor="middle">Mar</text><path d="M215.2,252.0 V208.4 Q215.2,208.4 215.2,208.4 H250.0 Q250.0,208.4 250.0,208.4 V252.0 Z" class="s1"><title>Abr · Dissertações: 11</title></path><path d="M215.2,206.4 V200.5 Q215.2,196.5 219.2,196.5 H246.0 Q250.0,196.5 250.0,200.5 V206.4 Z" class="s2"><title>Abr · Teses: 3</title></path><text x="232.6" y="191.5" class="val" text-anchor="middle">14</text><text x="232.6" y="270" class="tick" text-anchor="middle">Abr</text><path d="M271.3,252.0 V192.5 Q271.3,192.5 271.3,192.5 H306.2 Q306.2,192.5 306.2,192.5 V252.0 Z" class="s1"><title>Mai · Dissertações: 15</title></path><path d="M271.3,190.5 V180.6 Q271.3,176.6 275.3,176.6 H302.2 Q306.2,176.6 306.2,180.6 V190.5 Z" class="s2"><title>Mai · Teses: 4</title></path><text x="288.8" y="171.6" class="val" text-anchor="middle">19</text><text x="288.8" y="270" class="tick" text-anchor="middle">Mai</text><path d="M327.5,252.0 V196.5 Q327.5,196.5 327.5,196.5 H362.3 Q362.3,196.5 362.3,196.5 V252.0 Z" class="s1"><title>Jun · Dissertações: 14</title></path><path d="M327.5,194.5 V184.6 Q327.5,180.6 331.5,180.6 H358.3 Q362.3,180.6 362.3,184.6 V194.5 Z" class="s2"><title>Jun · Teses: 4</title></path><text x="344.9" y="175.6" class="val" text-anchor="middle">18</text><text x="344.9" y="270" class="tick" text-anchor="middle">Jun</text><path d="M383.7,252.0 V160.8 Q383.7,160.8 383.7,160.8 H418.5 Q418.5,160.8 418.5,160.8 V252.0 Z" class="s1"><title>Jul · Dissertações: 23</title></path><path d="M383.7,158.8 V137.0 Q383.7,133.0 387.7,133.0 H414.5 Q418.5,133.0 418.5,137.0 V158.8 Z" class="s2"><title>Jul · Teses: 7</title></path><text x="401.1" y="128.0" class="val" text-anchor="middle">30</text><text x="401.1" y="270" class="tick" text-anchor="middle">Jul</text><path d="M439.8,252.0 V172.7 Q439.8,172.7 439.8,172.7 H474.7 Q474.7,172.7 474.7,172.7 V252.0 Z" class="s1"><title>Ago · Dissertações: 20</title></path><path d="M439.8,170.7 V164.8 Q439.8,160.8 443.8,160.8 H470.7 Q474.7,160.8 474.7,164.8 V170.7 Z" class="s2"><title>Ago · Teses: 3</title></path><text x="457.2" y="155.8" class="val" text-anchor="middle">23</text><text x="457.2" y="270" class="tick" text-anchor="middle">Ago</text><path d="M496.0,252.0 V176.6 Q496.0,176.6 496.0,176.6 H530.8 Q530.8,176.6 530.8,176.6 V252.0 Z" class="s1"><title>Set · Dissertações: 19</title></path><path d="M496.0,174.6 V148.9 Q496.0,144.9 500.0,144.9 H526.8 Q530.8,144.9 530.8,148.9 V174.6 Z" class="s2"><title>Set · Teses: 8</title></path><text x="513.4" y="139.9" class="val" text-anchor="middle">27</text><text x="513.4" y="270" class="tick" text-anchor="middle">Set</text><path d="M552.2,252.0 V212.3 Q552.2,212.3 552.2,212.3 H587.0 Q587.0,212.3 587.0,212.3 V252.0 Z" class="s1"><title>Out · Dissertações: 10</title></path><path d="M552.2,210.3 V204.4 Q552.2,200.4 556.2,200.4 H583.0 Q587.0,200.4 587.0,204.4 V210.3 Z" class="s2"><title>Out · Teses: 3</title></path><text x="569.6" y="195.4" class="val" text-anchor="middle">13</text><text x="569.6" y="270" class="tick" text-anchor="middle">Out</text><path d="M608.3,252.0 V172.7 Q608.3,172.7 608.3,172.7 H643.2 Q643.2,172.7 643.2,172.7 V252.0 Z" class="s1"><title>Nov · Dissertações: 20</title></path><path d="M608.3,170.7 V148.9 Q608.3,144.9 612.3,144.9 H639.2 Q643.2,144.9 643.2,148.9 V170.7 Z" class="s2"><title>Nov · Teses: 7</title></path><text x="625.7" y="139.9" class="val" text-anchor="middle">27</text><text x="625.7" y="270" class="tick" text-anchor="middle">Nov</text><path d="M664.5,252.0 V85.4 Q664.5,85.4 664.5,85.4 H699.3 Q699.3,85.4 699.3,85.4 V252.0 Z" class="s1"><title>Dez · Dissertações: 42</title></path><path d="M664.5,83.4 V33.9 Q664.5,29.9 668.5,29.9 H695.3 Q699.3,29.9 699.3,33.9 V83.4 Z" class="s2"><title>Dez · Teses: 14</title></path><text x="681.9" y="24.9" class="val" text-anchor="middle">56</text><text x="681.9" y="270" class="tick" text-anchor="middle">Dez</text></svg>
+</section>
+
+<section>
+<h2>4. Orientadores com mais defesas (top 15)</h2>
+<svg viewBox="0 0 720 398" role="img" class="chart"><text x="252" y="19" class="lbl" text-anchor="end">Rita Suzana Pitangueira Maciel</text><path d="M260,8 H666.0 Q670.0,8 670.0,12 V20 Q670.0,24 666.0,24 H260 Z" class="s1"><title>Rita Suzana Pitangueira Maciel: 19</title></path><text x="676.0" y="20" class="val">19</text><text x="252" y="45" class="lbl" text-anchor="end">Manoel Gomes de Mendonca Neto</text><path d="M260,34 H622.8 Q626.8,34 626.8,38 V46 Q626.8,50 622.8,50 H260 Z" class="s1"><title>Manoel Gomes de Mendonca Neto: 17</title></path><text x="632.8" y="46" class="val">17</text><text x="252" y="71" class="lbl" text-anchor="end">Eduardo Santana de Almeida</text><path d="M260,60 H622.8 Q626.8,60 626.8,64 V72 Q626.8,76 622.8,76 H260 Z" class="s1"><title>Eduardo Santana de Almeida: 17</title></path><text x="632.8" y="72" class="val">17</text><text x="252" y="97" class="lbl" text-anchor="end">Frederico Araujo Durao</text><path d="M260,86 H601.3 Q605.3,86 605.3,90 V98 Q605.3,102 601.3,102 H260 Z" class="s1"><title>Frederico Araujo Durao: 16</title></path><text x="611.3" y="98" class="val">16</text><text x="252" y="123" class="lbl" text-anchor="end">Ivan do Carmo Machado</text><path d="M260,112 H601.3 Q605.3,112 605.3,116 V124 Q605.3,128 601.3,128 H260 Z" class="s1"><title>Ivan do Carmo Machado: 16</title></path><text x="611.3" y="124" class="val">16</text><text x="252" y="149" class="lbl" text-anchor="end">Leobino Nascimento Sampaio</text><path d="M260,138 H558.1 Q562.1,138 562.1,142 V150 Q562.1,154 558.1,154 H260 Z" class="s1"><title>Leobino Nascimento Sampaio: 14</title></path><text x="568.1" y="150" class="val">14</text><text x="252" y="175" class="lbl" text-anchor="end">Cassio Vinicius Serafim Prazeres</text><path d="M260,164 H536.5 Q540.5,164 540.5,168 V176 Q540.5,180 536.5,180 H260 Z" class="s1"><title>Cassio Vinicius Serafim Prazeres: 13</title></path><text x="546.5" y="176" class="val">13</text><text x="252" y="201" class="lbl" text-anchor="end">Ricardo Araujo Rios</text><path d="M260,190 H536.5 Q540.5,190 540.5,194 V202 Q540.5,206 536.5,206 H260 Z" class="s1"><title>Ricardo Araujo Rios: 13</title></path><text x="546.5" y="202" class="val">13</text><text x="252" y="227" class="lbl" text-anchor="end">Daniela Barreiro Claro</text><path d="M260,216 H493.4 Q497.4,216 497.4,220 V228 Q497.4,232 493.4,232 H260 Z" class="s1"><title>Daniela Barreiro Claro: 11</title></path><text x="503.4" y="228" class="val">11</text><text x="252" y="253" class="lbl" text-anchor="end">Maycon Leone Maciel Peixoto</text><path d="M260,242 H493.4 Q497.4,242 497.4,246 V254 Q497.4,258 493.4,258 H260 Z" class="s1"><title>Maycon Leone Maciel Peixoto: 11</title></path><text x="503.4" y="254" class="val">11</text><text x="252" y="279" class="lbl" text-anchor="end">Ecivaldo de Souza Matos</text><path d="M260,268 H471.8 Q475.8,268 475.8,272 V280 Q475.8,284 471.8,284 H260 Z" class="s1"><title>Ecivaldo de Souza Matos: 10</title></path><text x="481.8" y="280" class="val">10</text><text x="252" y="305" class="lbl" text-anchor="end">Gustavo Bittencourt Figueiredo</text><path d="M260,294 H450.2 Q454.2,294 454.2,298 V306 Q454.2,310 450.2,310 H260 Z" class="s1"><title>Gustavo Bittencourt Figueiredo: 9</title></path><text x="460.2" y="306" class="val">9</text><text x="252" y="331" class="lbl" text-anchor="end">Tatiane Nogueira Rios</text><path d="M260,320 H450.2 Q454.2,320 454.2,324 V332 Q454.2,336 450.2,336 H260 Z" class="s1"><title>Tatiane Nogueira Rios: 9</title></path><text x="460.2" y="332" class="val">9</text><text x="252" y="357" class="lbl" text-anchor="end">George Marconi de Araujo Lima</text><path d="M260,346 H407.1 Q411.1,346 411.1,350 V358 Q411.1,362 407.1,362 H260 Z" class="s1"><title>George Marconi de Araujo Lima: 7</title></path><text x="417.1" y="358" class="val">7</text><text x="252" y="383" class="lbl" text-anchor="end">Luciano Reboucas de Oliveira</text><path d="M260,372 H407.1 Q411.1,372 411.1,376 V384 Q411.1,388 407.1,388 H260 Z" class="s1"><title>Luciano Reboucas de Oliveira: 7</title></path><text x="417.1" y="384" class="val">7</text></svg>
+<details><summary>Ver tabela</summary><table class="dataframe tab">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Tipo</th>
+      <th>Orientador</th>
+      <th>Dissertações</th>
+      <th>Teses</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th></th>
+      <td>Rita Suzana Pitangueira Maciel</td>
+      <td>15</td>
+      <td>4</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>Manoel Gomes de Mendonca Neto</td>
+      <td>10</td>
+      <td>7</td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>Eduardo Santana de Almeida</td>
+      <td>13</td>
+      <td>4</td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>Frederico Araujo Durao</td>
+      <td>11</td>
+      <td>5</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>Ivan do Carmo Machado</td>
+      <td>12</td>
+      <td>4</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>Leobino Nascimento Sampaio</td>
+      <td>10</td>
+      <td>4</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>Cassio Vinicius Serafim Prazeres</td>
+      <td>9</td>
+      <td>4</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>Ricardo Araujo Rios</td>
+      <td>10</td>
+      <td>3</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>Daniela Barreiro Claro</td>
+      <td>8</td>
+      <td>3</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>Maycon Leone Maciel Peixoto</td>
+      <td>9</td>
+      <td>2</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>Ecivaldo de Souza Matos</td>
+      <td>6</td>
+      <td>4</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>Gustavo Bittencourt Figueiredo</td>
+      <td>7</td>
+      <td>2</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>Tatiane Nogueira Rios</td>
+      <td>7</td>
+      <td>2</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>George Marconi de Araujo Lima</td>
+      <td>4</td>
+      <td>3</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>Luciano Reboucas de Oliveira</td>
+      <td>4</td>
+      <td>3</td>
+      <td>7</td>
+    </tr>
+  </tbody>
+</table></details>
+</section>
+
+<section>
+<h2>5. Bancas</h2>
+<h3>Tamanho da banca por tipo</h3>
+<table class="dataframe tab">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Tipo</th>
+      <th>Média</th>
+      <th>Mín.</th>
+      <th>Máx.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Dissertações</td>
+      <td>3.1</td>
+      <td>3</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>Teses</td>
+      <td>5.1</td>
+      <td>5</td>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
+<h3>Membros que mais participam de bancas (top 15, sem contar o próprio orientador)</h3>
+<svg viewBox="0 0 720 398" role="img" class="chart"><text x="252" y="19" class="lbl" text-anchor="end">Rodrigo Rocha Gomes e Souza</text><path d="M260,8 H666.0 Q670.0,8 670.0,12 V20 Q670.0,24 666.0,24 H260 Z" class="s1"><title>Rodrigo Rocha Gomes e Souza: 19</title></path><text x="676.0" y="20" class="val">19</text><text x="252" y="45" class="lbl" text-anchor="end">Lais do Nascimento Salvador</text><path d="M260,34 H601.3 Q605.3,34 605.3,38 V46 Q605.3,50 601.3,50 H260 Z" class="s1"><title>Lais do Nascimento Salvador: 16</title></path><text x="611.3" y="46" class="val">16</text><text x="252" y="71" class="lbl" text-anchor="end">Maycon Leone Maciel Peixoto</text><path d="M260,60 H579.7 Q583.7,60 583.7,64 V72 Q583.7,76 579.7,76 H260 Z" class="s1"><title>Maycon Leone Maciel Peixoto: 15</title></path><text x="589.7" y="72" class="val">15</text><text x="252" y="97" class="lbl" text-anchor="end">Claudio Nogueira Sant Anna</text><path d="M260,86 H579.7 Q583.7,86 583.7,90 V98 Q583.7,102 579.7,102 H260 Z" class="s1"><title>Claudio Nogueira Sant Anna: 15</title></path><text x="589.7" y="98" class="val">15</text><text x="252" y="123" class="lbl" text-anchor="end">Ivan do Carmo Machado</text><path d="M260,112 H579.7 Q583.7,112 583.7,116 V124 Q583.7,128 579.7,128 H260 Z" class="s1"><title>Ivan do Carmo Machado: 15</title></path><text x="589.7" y="124" class="val">15</text><text x="252" y="149" class="lbl" text-anchor="end">Danilo Barbosa Coimbra</text><path d="M260,138 H558.1 Q562.1,138 562.1,142 V150 Q562.1,154 558.1,154 H260 Z" class="s1"><title>Danilo Barbosa Coimbra: 14</title></path><text x="568.1" y="150" class="val">14</text><text x="252" y="175" class="lbl" text-anchor="end">Christina Von Flach Garcia Chavez</text><path d="M260,164 H536.5 Q540.5,164 540.5,168 V176 Q540.5,180 536.5,180 H260 Z" class="s1"><title>Christina Von Flach Garcia Chavez: 13</title></path><text x="546.5" y="176" class="val">13</text><text x="252" y="201" class="lbl" text-anchor="end">Tatiane Nogueira Rios</text><path d="M260,190 H514.9 Q518.9,190 518.9,194 V202 Q518.9,206 514.9,206 H260 Z" class="s1"><title>Tatiane Nogueira Rios: 12</title></path><text x="524.9" y="202" class="val">12</text><text x="252" y="227" class="lbl" text-anchor="end">Rita Suzana Pitangueira Maciel</text><path d="M260,216 H514.9 Q518.9,216 518.9,220 V228 Q518.9,232 514.9,232 H260 Z" class="s1"><title>Rita Suzana Pitangueira Maciel: 12</title></path><text x="524.9" y="228" class="val">12</text><text x="252" y="253" class="lbl" text-anchor="end">Marlo Vieira dos Santos e Souza</text><path d="M260,242 H514.9 Q518.9,242 518.9,246 V254 Q518.9,258 514.9,258 H260 Z" class="s1"><title>Marlo Vieira dos Santos e Souza: 12</title></path><text x="524.9" y="254" class="val">12</text><text x="252" y="279" class="lbl" text-anchor="end">Manoel Gomes de Mendonca Neto</text><path d="M260,268 H493.4 Q497.4,268 497.4,272 V280 Q497.4,284 493.4,284 H260 Z" class="s1"><title>Manoel Gomes de Mendonca Neto: 11</title></path><text x="503.4" y="280" class="val">11</text><text x="252" y="305" class="lbl" text-anchor="end">Frederico Araujo Durao</text><path d="M260,294 H471.8 Q475.8,294 475.8,298 V306 Q475.8,310 471.8,310 H260 Z" class="s1"><title>Frederico Araujo Durao: 10</title></path><text x="481.8" y="306" class="val">10</text><text x="252" y="331" class="lbl" text-anchor="end">Bruno Pereira dos Santos</text><path d="M260,320 H450.2 Q454.2,320 454.2,324 V332 Q454.2,336 450.2,336 H260 Z" class="s1"><title>Bruno Pereira dos Santos: 9</title></path><text x="460.2" y="332" class="val">9</text><text x="252" y="357" class="lbl" text-anchor="end">Daniela Barreiro Claro</text><path d="M260,346 H450.2 Q454.2,346 454.2,350 V358 Q454.2,362 450.2,362 H260 Z" class="s1"><title>Daniela Barreiro Claro: 9</title></path><text x="460.2" y="358" class="val">9</text><text x="252" y="383" class="lbl" text-anchor="end">Allan Edgard Silva Freitas</text><path d="M260,372 H428.6 Q432.6,372 432.6,376 V384 Q432.6,388 428.6,388 H260 Z" class="s1"><title>Allan Edgard Silva Freitas: 8</title></path><text x="438.6" y="384" class="val">8</text></svg>
+<p class="nota">338 pessoas diferentes participaram de bancas como não orientadoras;
+304 delas nunca aparecem como orientadoras no programa, o que indica participação externa.</p>
+</section>
+
+<section>
+<h2>6. Temas: palavras mais frequentes nos títulos</h2>
+<p class="nota">Palavras com mais de 2 letras, sem artigos e preposições (PT/EN).</p>
+<svg viewBox="0 0 720 528" role="img" class="chart"><text x="252" y="19" class="lbl" text-anchor="end">software</text><path d="M260,8 H666.0 Q670.0,8 670.0,12 V20 Q670.0,24 666.0,24 H260 Z" class="s1"><title>software: 41</title></path><text x="676.0" y="20" class="val">41</text><text x="252" y="45" class="lbl" text-anchor="end">dados</text><path d="M260,34 H536.0 Q540.0,34 540.0,38 V46 Q540.0,50 536.0,50 H260 Z" class="s1"><title>dados: 28</title></path><text x="546.0" y="46" class="val">28</text><text x="252" y="71" class="lbl" text-anchor="end">redes</text><path d="M260,60 H536.0 Q540.0,60 540.0,64 V72 Q540.0,76 536.0,76 H260 Z" class="s1"><title>redes: 28</title></path><text x="546.0" y="72" class="val">28</text><text x="252" y="97" class="lbl" text-anchor="end">sistemas</text><path d="M260,86 H506.0 Q510.0,86 510.0,90 V98 Q510.0,102 506.0,102 H260 Z" class="s1"><title>sistemas: 25</title></path><text x="516.0" y="98" class="val">25</text><text x="252" y="123" class="lbl" text-anchor="end">recomendação</text><path d="M260,112 H416.0 Q420.0,112 420.0,116 V124 Q420.0,128 416.0,128 H260 Z" class="s1"><title>recomendação: 16</title></path><text x="426.0" y="124" class="val">16</text><text x="252" y="149" class="lbl" text-anchor="end">modelo</text><path d="M260,138 H406.0 Q410.0,138 410.0,142 V150 Q410.0,154 406.0,154 H260 Z" class="s1"><title>modelo: 15</title></path><text x="416.0" y="150" class="val">15</text><text x="252" y="175" class="lbl" text-anchor="end">problema</text><path d="M260,164 H366.0 Q370.0,164 370.0,168 V176 Q370.0,180 366.0,180 H260 Z" class="s1"><title>problema: 11</title></path><text x="376.0" y="176" class="val">11</text><text x="252" y="201" class="lbl" text-anchor="end">desenvolvimento</text><path d="M260,190 H356.0 Q360.0,190 360.0,194 V202 Q360.0,206 356.0,206 H260 Z" class="s1"><title>desenvolvimento: 10</title></path><text x="366.0" y="202" class="val">10</text><text x="252" y="227" class="lbl" text-anchor="end">projetos</text><path d="M260,216 H356.0 Q360.0,216 360.0,220 V228 Q360.0,232 356.0,232 H260 Z" class="s1"><title>projetos: 10</title></path><text x="366.0" y="228" class="val">10</text><text x="252" y="253" class="lbl" text-anchor="end">tempo</text><path d="M260,242 H356.0 Q360.0,242 360.0,246 V254 Q360.0,258 356.0,258 H260 Z" class="s1"><title>tempo: 10</title></path><text x="366.0" y="254" class="val">10</text><text x="252" y="279" class="lbl" text-anchor="end">test</text><path d="M260,268 H346.0 Q350.0,268 350.0,272 V280 Q350.0,284 346.0,284 H260 Z" class="s1"><title>test: 9</title></path><text x="356.0" y="280" class="val">9</text><text x="252" y="305" class="lbl" text-anchor="end">smells</text><path d="M260,294 H346.0 Q350.0,294 350.0,298 V306 Q350.0,310 346.0,310 H260 Z" class="s1"><title>smells: 9</title></path><text x="356.0" y="306" class="val">9</text><text x="252" y="331" class="lbl" text-anchor="end">dívida</text><path d="M260,320 H346.0 Q350.0,320 350.0,324 V332 Q350.0,336 346.0,336 H260 Z" class="s1"><title>dívida: 9</title></path><text x="356.0" y="332" class="val">9</text><text x="252" y="357" class="lbl" text-anchor="end">computacional</text><path d="M260,346 H346.0 Q350.0,346 350.0,350 V358 Q350.0,362 346.0,362 H260 Z" class="s1"><title>computacional: 9</title></path><text x="356.0" y="358" class="val">9</text><text x="252" y="383" class="lbl" text-anchor="end">engenharia</text><path d="M260,372 H346.0 Q350.0,372 350.0,376 V384 Q350.0,388 346.0,388 H260 Z" class="s1"><title>engenharia: 9</title></path><text x="356.0" y="384" class="val">9</text><text x="252" y="409" class="lbl" text-anchor="end">framework</text><path d="M260,398 H346.0 Q350.0,398 350.0,402 V410 Q350.0,414 346.0,414 H260 Z" class="s1"><title>framework: 9</title></path><text x="356.0" y="410" class="val">9</text><text x="252" y="435" class="lbl" text-anchor="end">modelos</text><path d="M260,424 H336.0 Q340.0,424 340.0,428 V436 Q340.0,440 336.0,440 H260 Z" class="s1"><title>modelos: 8</title></path><text x="346.0" y="436" class="val">8</text><text x="252" y="461" class="lbl" text-anchor="end">recursos</text><path d="M260,450 H336.0 Q340.0,450 340.0,454 V462 Q340.0,466 336.0,466 H260 Z" class="s1"><title>recursos: 8</title></path><text x="346.0" y="462" class="val">8</text><text x="252" y="487" class="lbl" text-anchor="end">gerenciamento</text><path d="M260,476 H336.0 Q340.0,476 340.0,480 V488 Q340.0,492 336.0,492 H260 Z" class="s1"><title>gerenciamento: 8</title></path><text x="346.0" y="488" class="val">8</text><text x="252" y="513" class="lbl" text-anchor="end">técnica</text><path d="M260,502 H336.0 Q340.0,502 340.0,506 V514 Q340.0,518 336.0,518 H260 Z" class="s1"><title>técnica: 8</title></path><text x="346.0" y="514" class="val">8</text></svg>
+<h3>Títulos em inglês por ano</h3>
+<svg viewBox="0 0 720 268" role="img" class="chart"><text x="252" y="19" class="lbl" text-anchor="end">2017</text><path d="M260,8 H256.0 Q260.0,8 260.0,12 V20 Q260.0,24 256.0,24 H260 Z" class="s1"><title>2017: 0%</title></path><text x="266.0" y="20" class="val">0%</text><text x="252" y="45" class="lbl" text-anchor="end">2018</text><path d="M260,34 H529.3 Q533.3,34 533.3,38 V46 Q533.3,50 529.3,50 H260 Z" class="s1"><title>2018: 26%</title></path><text x="539.3" y="46" class="val">26%</text><text x="252" y="71" class="lbl" text-anchor="end">2019</text><path d="M260,60 H571.4 Q575.4,60 575.4,64 V72 Q575.4,76 571.4,76 H260 Z" class="s1"><title>2019: 30%</title></path><text x="581.4" y="72" class="val">30%</text><text x="252" y="97" class="lbl" text-anchor="end">2020</text><path d="M260,86 H340.1 Q344.1,86 344.1,90 V98 Q344.1,102 340.1,102 H260 Z" class="s1"><title>2020: 8%</title></path><text x="350.1" y="98" class="val">8%</text><text x="252" y="123" class="lbl" text-anchor="end">2021</text><path d="M260,112 H403.2 Q407.2,112 407.2,116 V124 Q407.2,128 403.2,128 H260 Z" class="s1"><title>2021: 14%</title></path><text x="413.2" y="124" class="val">14%</text><text x="252" y="149" class="lbl" text-anchor="end">2022</text><path d="M260,138 H361.1 Q365.1,138 365.1,142 V150 Q365.1,154 361.1,154 H260 Z" class="s1"><title>2022: 10%</title></path><text x="371.1" y="150" class="val">10%</text><text x="252" y="175" class="lbl" text-anchor="end">2023</text><path d="M260,164 H319.1 Q323.1,164 323.1,168 V176 Q323.1,180 319.1,180 H260 Z" class="s1"><title>2023: 6%</title></path><text x="329.1" y="176" class="val">6%</text><text x="252" y="201" class="lbl" text-anchor="end">2024</text><path d="M260,190 H403.2 Q407.2,190 407.2,194 V202 Q407.2,206 403.2,206 H260 Z" class="s1"><title>2024: 14%</title></path><text x="413.2" y="202" class="val">14%</text><text x="252" y="227" class="lbl" text-anchor="end">2025</text><path d="M260,216 H392.7 Q396.7,216 396.7,220 V228 Q396.7,232 392.7,232 H260 Z" class="s1"><title>2025: 13%</title></path><text x="402.7" y="228" class="val">13%</text><text x="252" y="253" class="lbl" text-anchor="end">2026</text><path d="M260,242 H666.0 Q670.0,242 670.0,246 V254 Q670.0,258 666.0,258 H260 Z" class="s1"><title>2026: 39%</title></path><text x="676.0" y="254" class="val">39%</text></svg>
+</section>
+
+<section>
+<h2>7. Resumos (número de palavras)</h2>
+<table class="dataframe tab">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Tipo</th>
+      <th>Média</th>
+      <th>Mediana</th>
+      <th>Mín.</th>
+      <th>Máx.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Dissertações</td>
+      <td>294</td>
+      <td>283</td>
+      <td>60</td>
+      <td>600</td>
+    </tr>
+    <tr>
+      <td>Teses</td>
+      <td>392</td>
+      <td>371</td>
+      <td>182</td>
+      <td>757</td>
+    </tr>
+  </tbody>
+</table>
+</section>
+
+<section>
+<h2>8. Qualidade dos dados</h2>
+<table class="dataframe tab">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Campo</th>
+      <th>Preenchidos</th>
+      <th>Vazios</th>
+      <th>% preenchido</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Discente</td>
+      <td>269</td>
+      <td>0</td>
+      <td>100,0%</td>
+    </tr>
+    <tr>
+      <td>Título</td>
+      <td>269</td>
+      <td>0</td>
+      <td>100,0%</td>
+    </tr>
+    <tr>
+      <td>Orientador</td>
+      <td>269</td>
+      <td>0</td>
+      <td>100,0%</td>
+    </tr>
+    <tr>
+      <td>Banca</td>
+      <td>269</td>
+      <td>0</td>
+      <td>100,0%</td>
+    </tr>
+    <tr>
+      <td>Data</td>
+      <td>269</td>
+      <td>0</td>
+      <td>100,0%</td>
+    </tr>
+    <tr>
+      <td>Resumo (português)</td>
+      <td>269</td>
+      <td>0</td>
+      <td>100,0%</td>
+    </tr>
+    <tr>
+      <td>Abstract (resumo em inglês)</td>
+      <td>268</td>
+      <td>1</td>
+      <td>99,6%</td>
+    </tr>
+    <tr>
+      <td>Link da ata assinada</td>
+      <td>4</td>
+      <td>265</td>
+      <td>1,5%</td>
+    </tr>
+  </tbody>
+</table>
+<p class="nota">Todas as 269 defesas têm resumo em português. O único abstract vazio é o de
+Jane Barbosa Santos: no próprio SIGAA o campo está em branco.
+O link da ata assinada só existe nas defesas que o publicaram no SIGAA. Nomes foram agrupados
+sem acento e sem diferença de maiúsculas, porque o sistema usa grafias diferentes para a mesma pessoa.</p>
+</section>
+</main></body></html>

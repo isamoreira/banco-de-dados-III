@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Relatório de Defesas</title>
+<style>
+:root{color-scheme:light;--bg:#fcfcfb;--card:#ffffff;--tx:#0b0b0b;--tx2:#52514e;--grid:#e6e5e1;
+ --line:#dcdad4;--s1:#2a78d6;--s2:#eb6834}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#1a1a19;
+ --card:#222221;--tx:#f0efec;--tx2:#c3c2b7;--grid:#333331;--line:#3a3a38;--s1:#3987e5;--s2:#d95926}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#1a1a19;--card:#222221;--tx:#f0efec;--tx2:#c3c2b7;
+ --grid:#333331;--line:#3a3a38;--s1:#3987e5;--s2:#d95926}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.55 system-ui,"Segoe UI",sans-serif}
+main{max-width:860px;margin:0 auto;padding:32px 16px 64px}
+h1{font-size:26px;margin:0 0 4px}h2{font-size:19px;margin:0 0 12px}h3{font-size:15px;margin:18px 0 8px}
+.sub,.nota{color:var(--tx2);font-size:13px}
+section{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px;margin:16px 0}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:20px 0}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px}
+.tile b{display:block;font-size:26px;font-variant-numeric:tabular-nums}.tile span{color:var(--tx2);font-size:13px}
+.dest li{margin:6px 0}
+.chart{width:100%;height:auto;display:block;font-size:12px}
+.grid{stroke:var(--grid);stroke-width:1}
+.tick,.lbl{fill:var(--tx2)}.val{fill:var(--tx);font-variant-numeric:tabular-nums}
+.s1{fill:var(--s1)}.s2{fill:var(--s2)}path.s1:hover,path.s2:hover{opacity:.8}
+.leg{display:flex;gap:16px;font-size:13px;color:var(--tx2);margin-bottom:6px}
+.leg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.leg i.s1{background:var(--s1)}.leg i.s2{background:var(--s2)}
+.tab{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums;margin:8px 0}
+.tab th,.tab td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left}
+.tab th{color:var(--tx2);font-weight:600}
+details{margin-top:8px}summary{cursor:pointer;color:var(--tx2);font-size:13px}
+code{font-size:12px}
+@media print{section{break-inside:avoid}details{display:block}}
+</style></head><body><main>
+<header>
+  <h1>Defesas de pós-graduação — análise 2025–2026</h1>
+  <p class="sub">Fonte: SIGAA/UFBA, página pública de defesas do programa (id 1820) · arquivo <code>defesas_1820.csv</code>
+  · 53 registros, 2025–2026 · gerado em 07/11/2026</p>
+  <p class="sub"><b>Recorte: 2025, 2026 — 53 de 269 defesas do arquivo.</b></p>
+</header>
+
+<div class="tiles"><div class="tile"><b>53</b><span>defesas no total</span></div><div class="tile"><b>36</b><span>dissertações</span></div><div class="tile"><b>17</b><span>teses</span></div><div class="tile"><b>21</b><span>orientadores</span></div><div class="tile"><b>26</b><span>defesas/ano (2025–2026)</span></div></div>
+
+<section>
+<h2>1. Destaques</h2>
+<ul class="dest">
+  <li>No período, o programa registra <b>53</b> defesas: <b>36</b> dissertações
+      (68%) e <b>17</b> teses
+      (32%).</li>
+  <li>Foram <b>30</b> defesas em 2025 e <b>23</b> em 2026 (-23%). Teses: 11 → 6; dissertações: 19 → 17. 2026 considera só as defesas publicadas até a coleta. 2 defesas ainda estão agendadas (data posterior a 07/11/2026).</li>
+  <li><b>Setembro</b> é o mês com mais defesas (9).</li>
+  <li>Os 5 orientadores mais ativos respondem por <b>51%</b> das defesas;
+      10 dos 21 orientadores aparecem em uma única defesa.</li>
+  <li>Em média, a banca tem <b>3.0</b> membros nas dissertações e
+      <b>5.1</b> nas teses. O orientador consta na banca em
+      98% dos casos.</li>
+  <li><b>25%</b> dos títulos estão em inglês (classificação automática, aproximada).</li>
+</ul>
+</section>
+
+<section>
+<h2>2. Defesas por ano</h2>
+<div class="leg"><span><i class="s1"></i>Dissertações</span><span><i class="s2"></i>Teses</span></div><svg viewBox="0 0 720 280" role="img" class="chart"><line x1="36" x2="710" y1="252.0" y2="252.0" class="grid"/><text x="30" y="256.0" class="tick" text-anchor="end">0</text><line x1="36" x2="710" y1="218.0" y2="218.0" class="grid"/><text x="30" y="222.0" class="tick" text-anchor="end">5</text><line x1="36" x2="710" y1="184.0" y2="184.0" class="grid"/><text x="30" y="188.0" class="tick" text-anchor="end">10</text><line x1="36" x2="710" y1="150.0" y2="150.0" class="grid"/><text x="30" y="154.0" class="tick" text-anchor="end">15</text><line x1="36" x2="710" y1="116.0" y2="116.0" class="grid"/><text x="30" y="120.0" class="tick" text-anchor="end">20</text><line x1="36" x2="710" y1="82.0" y2="82.0" class="grid"/><text x="30" y="86.0" class="tick" text-anchor="end">25</text><line x1="36" x2="710" y1="48.0" y2="48.0" class="grid"/><text x="30" y="52.0" class="tick" text-anchor="end">30</text><line x1="36" x2="710" y1="14.0" y2="14.0" class="grid"/><text x="30" y="18.0" class="tick" text-anchor="end">35</text><path d="M185.5,252.0 V122.8 Q185.5,122.8 185.5,122.8 H223.5 Q223.5,122.8 223.5,122.8 V252.0 Z" class="s1"><title>2025 · Dissertações: 19</title></path><path d="M185.5,120.8 V52.0 Q185.5,48.0 189.5,48.0 H219.5 Q223.5,48.0 223.5,52.0 V120.8 Z" class="s2"><title>2025 · Teses: 11</title></path><text x="204.5" y="43.0" class="val" text-anchor="middle">30</text><text x="204.5" y="270" class="tick" text-anchor="middle">2025</text><path d="M522.5,252.0 V136.4 Q522.5,136.4 522.5,136.4 H560.5 Q560.5,136.4 560.5,136.4 V252.0 Z" class="s1"><title>2026 · Dissertações: 17</title></path><path d="M522.5,134.4 V99.6 Q522.5,95.6 526.5,95.6 H556.5 Q560.5,95.6 560.5,99.6 V134.4 Z" class="s2"><title>2026 · Teses: 6</title></path><text x="541.5" y="90.6" class="val" text-anchor="middle">23</text><text x="541.5" y="270" class="tick" text-anchor="middle">2026</text></svg>
+<details><summary>Ver tabela</summary><table class="dataframe tab">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Tipo</th>
+      <th>Ano</th>
+      <th>Dissertações</th>
+      <th>Teses</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th></th>
+      <td>2025</td>
+      <td>19</td>
+      <td>11</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>2026</td>
+      <td>17</td>
+      <td>6</td>
+      <td>23</td>
+    </tr>
+  </tbody>
+</table></details>
+<h3>Indicadores por ano</h3>
+<table class="dataframe tab">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Ano</th>
+      <th>Defesas</th>
+      <th>Teses</th>
+      <th>Orientadores</th>
+      <th>Banca (média)</th>
+      <th>Palavras no resumo (média)</th>
+      <th>% títulos em inglês</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2025</td>
+      <td>30</td>
+      <td>11</td>
+      <td>17</td>
+      <td>3.8</td>
+      <td>327</td>
+      <td>13%</td>
+    </tr>
+    <tr>
+      <td>2026</td>
+      <td>23</td>
+      <td>6</td>
+      <td>11</td>
+      <td>3.5</td>
+      <td>313</td>
+      <td>39%</td>
+    </tr>
+  </tbody>
+</table>
+</section>
+
+<section>
+<h2>3. Distribuição por mês</h2>
+<p class="nota">Todos os anos somados, pela data da defesa.</p>
+<div class="leg"><span><i class="s1"></i>Dissertações</span><span><i class="s2"></i>Teses</span></div><svg viewBox="0 0 720 280" role="img" class="chart"><line x1="36" x2="710" y1="252.0" y2="252.0" class="grid"/><text x="30" y="256.0" class="tick" text-anchor="end">0</text><line x1="36" x2="710" y1="204.4" y2="204.4" class="grid"/><text x="30" y="208.4" class="tick" text-anchor="end">2</text><line x1="36" x2="710" y1="156.8" y2="156.8" class="grid"/><text x="30" y="160.8" class="tick" text-anchor="end">4</text><line x1="36" x2="710" y1="109.2" y2="109.2" class="grid"/><text x="30" y="113.2" class="tick" text-anchor="end">6</text><line x1="36" x2="710" y1="61.6" y2="61.6" class="grid"/><text x="30" y="65.6" class="tick" text-anchor="end">8</text><line x1="36" x2="710" y1="14.0" y2="14.0" class="grid"/><text x="30" y="18.0" class="tick" text-anchor="end">10</text><path d="M46.7,252.0 V228.2 Q46.7,228.2 46.7,228.2 H81.5 Q81.5,228.2 81.5,228.2 V252.0 Z" class="s1"><title>Jan · Dissertações: 1</title></path><path d="M46.7,226.2 V208.4 Q46.7,204.4 50.7,204.4 H77.5 Q81.5,204.4 81.5,208.4 V226.2 Z" class="s2"><title>Jan · Teses: 1</title></path><text x="64.1" y="199.4" class="val" text-anchor="middle">2</text><text x="64.1" y="270" class="tick" text-anchor="middle">Jan</text><path d="M102.8,252.0 V232.2 Q102.8,228.2 106.8,228.2 H133.7 Q137.7,228.2 137.7,232.2 V252.0 Z" class="s1"><title>Fev · Dissertações: 1</title></path><text x="120.2" y="223.2" class="val" text-anchor="middle">1</text><text x="120.2" y="270" class="tick" text-anchor="middle">Fev</text><path d="M159.0,252.0 V204.4 Q159.0,204.4 159.0,204.4 H193.8 Q193.8,204.4 193.8,204.4 V252.0 Z" class="s1"><title>Mar · Dissertações: 2</title></path><path d="M159.0,202.4 V160.8 Q159.0,156.8 163.0,156.8 H189.8 Q193.8,156.8 193.8,160.8 V202.4 Z" class="s2"><title>Mar · Teses: 2</title></path><text x="176.4" y="151.8" class="val" text-anchor="middle">4</text><text x="176.4" y="270" class="tick" text-anchor="middle">Mar</text><path d="M215.2,250.0 V208.4 Q215.2,204.4 219.2,204.4 H246.0 Q250.0,204.4 250.0,208.4 V250.0 Z" class="s2"><title>Abr · Teses: 2</title></path><text x="232.6" y="199.4" class="val" text-anchor="middle">2</text><text x="232.6" y="270" class="tick" text-anchor="middle">Abr</text><path d="M271.3,252.0 V180.6 Q271.3,180.6 271.3,180.6 H306.2 Q306.2,180.6 306.2,180.6 V252.0 Z" class="s1"><title>Mai · Dissertações: 3</title></path><path d="M271.3,178.6 V160.8 Q271.3,156.8 275.3,156.8 H302.2 Q306.2,156.8 306.2,160.8 V178.6 Z" class="s2"><title>Mai · Teses: 1</title></path><text x="288.8" y="151.8" class="val" text-anchor="middle">4</text><text x="288.8" y="270" class="tick" text-anchor="middle">Mai</text><path d="M327.5,252.0 V180.6 Q327.5,180.6 327.5,180.6 H362.3 Q362.3,180.6 362.3,180.6 V252.0 Z" class="s1"><title>Jun · Dissertações: 3</title></path><path d="M327.5,178.6 V160.8 Q327.5,156.8 331.5,156.8 H358.3 Q362.3,156.8 362.3,160.8 V178.6 Z" class="s2"><title>Jun · Teses: 1</title></path><text x="344.9" y="151.8" class="val" text-anchor="middle">4</text><text x="344.9" y="270" class="tick" text-anchor="middle">Jun</text><path d="M383.7,252.0 V156.8 Q383.7,156.8 383.7,156.8 H418.5 Q418.5,156.8 418.5,156.8 V252.0 Z" class="s1"><title>Jul · Dissertações: 4</title></path><path d="M383.7,154.8 V89.4 Q383.7,85.4 387.7,85.4 H414.5 Q418.5,85.4 418.5,89.4 V154.8 Z" class="s2"><title>Jul · Teses: 3</title></path><text x="401.1" y="80.4" class="val" text-anchor="middle">7</text><text x="401.1" y="270" class="tick" text-anchor="middle">Jul</text><path d="M439.8,252.0 V113.2 Q439.8,109.2 443.8,109.2 H470.7 Q474.7,109.2 474.7,113.2 V252.0 Z" class="s1"><title>Ago · Dissertações: 6</title></path><text x="457.2" y="104.2" class="val" text-anchor="middle">6</text><text x="457.2" y="270" class="tick" text-anchor="middle">Ago</text><path d="M496.0,252.0 V109.2 Q496.0,109.2 496.0,109.2 H530.8 Q530.8,109.2 530.8,109.2 V252.0 Z" class="s1"><title>Set · Dissertações: 6</title></path><path d="M496.0,107.2 V41.8 Q496.0,37.8 500.0,37.8 H526.8 Q530.8,37.8 530.8,41.8 V107.2 Z" class="s2"><title>Set · Teses: 3</title></path><text x="513.4" y="32.8" class="val" text-anchor="middle">9</text><text x="513.4" y="270" class="tick" text-anchor="middle">Set</text><text x="569.6" y="247.0" class="val" text-anchor="middle">0</text><text x="569.6" y="270" class="tick" text-anchor="middle">Out</text><path d="M608.3,252.0 V109.2 Q608.3,109.2 608.3,109.2 H643.2 Q643.2,109.2 643.2,109.2 V252.0 Z" class="s1"><title>Nov · Dissertações: 6</title></path><path d="M608.3,107.2 V89.4 Q608.3,85.4 612.3,85.4 H639.2 Q643.2,85.4 643.2,89.4 V107.2 Z" class="s2"><title>Nov · Teses: 1</title></path><text x="625.7" y="80.4" class="val" text-anchor="middle">7</text><text x="625.7" y="270" class="tick" text-anchor="middle">Nov</text><path d="M664.5,252.0 V156.8 Q664.5,156.8 664.5,156.8 H699.3 Q699.3,156.8 699.3,156.8 V252.0 Z" class="s1"><title>Dez · Dissertações: 4</title></path><path d="M664.5,154.8 V89.4 Q664.5,85.4 668.5,85.4 H695.3 Q699.3,85.4 699.3,89.4 V154.8 Z" class="s2"><title>Dez · Teses: 3</title></path><text x="681.9" y="80.4" class="val" text-anchor="middle">7</text><text x="681.9" y="270" class="tick" text-anchor="middle">Dez</text></svg>
+</section>
+
+<section>
+<h2>4. Orientadores com mais defesas (top 15)</h2>
+<svg viewBox="0 0 720 398" role="img" class="chart"><text x="252" y="19" class="lbl" text-anchor="end">Rita Suzana Pitangueira Maciel</text><path d="M260,8 H666.0 Q670.0,8 670.0,12 V20 Q670.0,24 666.0,24 H260 Z" class="s1"><title>Rita Suzana Pitangueira Maciel: 7</title></path><text x="676.0" y="20" class="val">7</text><text x="252" y="45" class="lbl" text-anchor="end">Eduardo Santana de Almeida</text><path d="M260,34 H607.4 Q611.4,34 611.4,38 V46 Q611.4,50 607.4,50 H260 Z" class="s1"><title>Eduardo Santana de Almeida: 6</title></path><text x="617.4" y="46" class="val">6</text><text x="252" y="71" class="lbl" text-anchor="end">Frederico Araujo Durao</text><path d="M260,60 H548.9 Q552.9,60 552.9,64 V72 Q552.9,76 548.9,76 H260 Z" class="s1"><title>Frederico Araujo Durao: 5</title></path><text x="558.9" y="72" class="val">5</text><text x="252" y="97" class="lbl" text-anchor="end">Manoel Gomes de Mendonca Neto</text><path d="M260,86 H548.9 Q552.9,86 552.9,90 V98 Q552.9,102 548.9,102 H260 Z" class="s1"><title>Manoel Gomes de Mendonca Neto: 5</title></path><text x="558.9" y="98" class="val">5</text><text x="252" y="123" class="lbl" text-anchor="end">Leobino Nascimento Sampaio</text><path d="M260,112 H490.3 Q494.3,112 494.3,116 V124 Q494.3,128 490.3,128 H260 Z" class="s1"><title>Leobino Nascimento Sampaio: 4</title></path><text x="500.3" y="124" class="val">4</text><text x="252" y="149" class="lbl" text-anchor="end">Maycon Leone Maciel Peixoto</text><path d="M260,138 H490.3 Q494.3,138 494.3,142 V150 Q494.3,154 490.3,154 H260 Z" class="s1"><title>Maycon Leone Maciel Peixoto: 4</title></path><text x="500.3" y="150" class="val">4</text><text x="252" y="175" class="lbl" text-anchor="end">Ricardo Araujo Rios</text><path d="M260,164 H431.7 Q435.7,164 435.7,168 V176 Q435.7,180 431.7,180 H260 Z" class="s1"><title>Ricardo Araujo Rios: 3</title></path><text x="441.7" y="176" class="val">3</text><text x="252" y="201" class="lbl" text-anchor="end">Lais do Nascimento Salvador</text><path d="M260,190 H431.7 Q435.7,190 435.7,194 V202 Q435.7,206 431.7,206 H260 Z" class="s1"><title>Lais do Nascimento Salvador: 3</title></path><text x="441.7" y="202" class="val">3</text><text x="252" y="227" class="lbl" text-anchor="end">Cassio Vinicius Serafim Prazeres</text><path d="M260,216 H373.1 Q377.1,216 377.1,220 V228 Q377.1,232 373.1,232 H260 Z" class="s1"><title>Cassio Vinicius Serafim Prazeres: 2</title></path><text x="383.1" y="228" class="val">2</text><text x="252" y="253" class="lbl" text-anchor="end">George Marconi de Araujo Lima</text><path d="M260,242 H373.1 Q377.1,242 377.1,246 V254 Q377.1,258 373.1,258 H260 Z" class="s1"><title>George Marconi de Araujo Lima: 2</title></path><text x="383.1" y="254" class="val">2</text><text x="252" y="279" class="lbl" text-anchor="end">Daniela Barreiro Claro</text><path d="M260,268 H373.1 Q377.1,268 377.1,272 V280 Q377.1,284 373.1,284 H260 Z" class="s1"><title>Daniela Barreiro Claro: 2</title></path><text x="383.1" y="280" class="val">2</text><text x="252" y="305" class="lbl" text-anchor="end">Christina Von Flach Garcia Chavez</text><path d="M260,294 H314.6 Q318.6,294 318.6,298 V306 Q318.6,310 314.6,310 H260 Z" class="s1"><title>Christina Von Flach Garcia Chavez: 1</title></path><text x="324.6" y="306" class="val">1</text><text x="252" y="331" class="lbl" text-anchor="end">Ecivaldo de Souza Matos</text><path d="M260,320 H314.6 Q318.6,320 318.6,324 V332 Q318.6,336 314.6,336 H260 Z" class="s1"><title>Ecivaldo de Souza Matos: 1</title></path><text x="324.6" y="332" class="val">1</text><text x="252" y="357" class="lbl" text-anchor="end">Bruno Pereira dos Santos</text><path d="M260,346 H314.6 Q318.6,346 318.6,350 V358 Q318.6,362 314.6,362 H260 Z" class="s1"><title>Bruno Pereira dos Santos: 1</title></path><text x="324.6" y="358" class="val">1</text><text x="252" y="383" class="lbl" text-anchor="end">Gecynalda Soares da Silva Gomes</text><path d="M260,372 H314.6 Q318.6,372 318.6,376 V384 Q318.6,388 314.6,388 H260 Z" class="s1"><title>Gecynalda Soares da Silva Gomes: 1</title></path><text x="324.6" y="384" class="val">1</text></svg>
+<details><summary>Ver tabela</summary><table class="dataframe tab">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Tipo</th>
+      <th>Orientador</th>
+      <th>Dissertações</th>
+      <th>Teses</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th></th>
+      <td>Rita Suzana Pitangueira Maciel</td>
+      <td>5</td>
+      <td>2</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>Eduardo Santana de Almeida</td>
+      <td>6</td>
+      <td>0</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>Frederico Araujo Durao</td>
+      <td>3</td>
+      <td>2</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>Manoel Gomes de Mendonca Neto</td>
+      <td>3</td>
+      <td>2</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>Leobino Nascimento Sampaio</td>
+      <td>2</td>
+      <td>2</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>Maycon Leone Maciel Peixoto</td>
+      <td>4</td>
+      <td>0</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>Ricardo Araujo Rios</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>Lais do Nascimento Salvador</td>
+      <td>3</td>
+      <td>0</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>Cassio Vinicius Serafim Prazeres</td>
+      <td>0</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>George Marconi de Araujo Lima</td>
+      <td>0</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>Daniela Barreiro Claro</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>Christina Von Flach Garcia Chavez</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>Ecivaldo de Souza Matos</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>Bruno Pereira dos Santos</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>Gecynalda Soares da Silva Gomes</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table></details>
+</section>
+
+<section>
+<h2>5. Bancas</h2>
+<h3>Tamanho da banca por tipo</h3>
+<table class="dataframe tab">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Tipo</th>
+      <th>Média</th>
+      <th>Mín.</th>
+      <th>Máx.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Dissertações</td>
+      <td>3.0</td>
+      <td>3</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>Teses</td>
+      <td>5.1</td>
+      <td>5</td>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
+<h3>Membros que mais participam de bancas (top 15, sem contar o próprio orientador)</h3>
+<svg viewBox="0 0 720 398" role="img" class="chart"><text x="252" y="19" class="lbl" text-anchor="end">Danilo Barbosa Coimbra</text><path d="M260,8 H666.0 Q670.0,8 670.0,12 V20 Q670.0,24 666.0,24 H260 Z" class="s1"><title>Danilo Barbosa Coimbra: 4</title></path><text x="676.0" y="20" class="val">4</text><text x="252" y="45" class="lbl" text-anchor="end">Lais do Nascimento Salvador</text><path d="M260,34 H666.0 Q670.0,34 670.0,38 V46 Q670.0,50 666.0,50 H260 Z" class="s1"><title>Lais do Nascimento Salvador: 4</title></path><text x="676.0" y="46" class="val">4</text><text x="252" y="71" class="lbl" text-anchor="end">Allan Edgard Silva Freitas</text><path d="M260,60 H666.0 Q670.0,60 670.0,64 V72 Q670.0,76 666.0,76 H260 Z" class="s1"><title>Allan Edgard Silva Freitas: 4</title></path><text x="676.0" y="72" class="val">4</text><text x="252" y="97" class="lbl" text-anchor="end">Bruno Pereira dos Santos</text><path d="M260,86 H666.0 Q670.0,86 670.0,90 V98 Q670.0,102 666.0,102 H260 Z" class="s1"><title>Bruno Pereira dos Santos: 4</title></path><text x="676.0" y="98" class="val">4</text><text x="252" y="123" class="lbl" text-anchor="end">Cassio Vinicius Serafim Prazeres</text><path d="M260,112 H563.5 Q567.5,112 567.5,116 V124 Q567.5,128 563.5,128 H260 Z" class="s1"><title>Cassio Vinicius Serafim Prazeres: 3</title></path><text x="573.5" y="124" class="val">3</text><text x="252" y="149" class="lbl" text-anchor="end">Maycon Leone Maciel Peixoto</text><path d="M260,138 H563.5 Q567.5,138 567.5,142 V150 Q567.5,154 563.5,154 H260 Z" class="s1"><title>Maycon Leone Maciel Peixoto: 3</title></path><text x="573.5" y="150" class="val">3</text><text x="252" y="175" class="lbl" text-anchor="end">Andre Levi Zanon</text><path d="M260,164 H461.0 Q465.0,164 465.0,168 V176 Q465.0,180 461.0,180 H260 Z" class="s1"><title>Andre Levi Zanon: 2</title></path><text x="471.0" y="176" class="val">2</text><text x="252" y="201" class="lbl" text-anchor="end">Rodrigo Moreira</text><path d="M260,190 H461.0 Q465.0,190 465.0,194 V202 Q465.0,206 461.0,206 H260 Z" class="s1"><title>Rodrigo Moreira: 2</title></path><text x="471.0" y="202" class="val">2</text><text x="252" y="227" class="lbl" text-anchor="end">Frederico Araujo Durao</text><path d="M260,216 H461.0 Q465.0,216 465.0,220 V228 Q465.0,232 461.0,232 H260 Z" class="s1"><title>Frederico Araujo Durao: 2</title></path><text x="471.0" y="228" class="val">2</text><text x="252" y="253" class="lbl" text-anchor="end">Emmanuel Sávio Silva Freire</text><path d="M260,242 H461.0 Q465.0,242 465.0,246 V254 Q465.0,258 461.0,258 H260 Z" class="s1"><title>Emmanuel Sávio Silva Freire: 2</title></path><text x="471.0" y="254" class="val">2</text><text x="252" y="279" class="lbl" text-anchor="end">José Amâncio Macedo Santos</text><path d="M260,268 H461.0 Q465.0,268 465.0,272 V280 Q465.0,284 461.0,284 H260 Z" class="s1"><title>José Amâncio Macedo Santos: 2</title></path><text x="471.0" y="280" class="val">2</text><text x="252" y="305" class="lbl" text-anchor="end">Luma da Rocha Seixas</text><path d="M260,294 H461.0 Q465.0,294 465.0,298 V306 Q465.0,310 461.0,310 H260 Z" class="s1"><title>Luma da Rocha Seixas: 2</title></path><text x="471.0" y="306" class="val">2</text><text x="252" y="331" class="lbl" text-anchor="end">Tatiane Nogueira Rios</text><path d="M260,320 H461.0 Q465.0,320 465.0,324 V332 Q465.0,336 461.0,336 H260 Z" class="s1"><title>Tatiane Nogueira Rios: 2</title></path><text x="471.0" y="332" class="val">2</text><text x="252" y="357" class="lbl" text-anchor="end">Rita Suzana Pitangueira Maciel</text><path d="M260,346 H461.0 Q465.0,346 465.0,350 V358 Q465.0,362 461.0,362 H260 Z" class="s1"><title>Rita Suzana Pitangueira Maciel: 2</title></path><text x="471.0" y="358" class="val">2</text><text x="252" y="383" class="lbl" text-anchor="end">Gustavo Bittencourt Figueiredo</text><path d="M260,372 H461.0 Q465.0,372 465.0,376 V384 Q465.0,388 461.0,388 H260 Z" class="s1"><title>Gustavo Bittencourt Figueiredo: 2</title></path><text x="471.0" y="384" class="val">2</text></svg>
+<p class="nota">108 pessoas diferentes participaram de bancas como não orientadoras;
+93 delas não aparecem como orientadoras no período analisado,
+o que sugere participação externa.</p>
+</section>
+
+<section>
+<h2>6. Temas: palavras mais frequentes nos títulos</h2>
+<p class="nota">Palavras com mais de 2 letras, sem artigos e preposições (PT/EN).</p>
+<svg viewBox="0 0 720 528" role="img" class="chart"><text x="252" y="19" class="lbl" text-anchor="end">software</text><path d="M260,8 H666.0 Q670.0,8 670.0,12 V20 Q670.0,24 666.0,24 H260 Z" class="s1"><title>software: 13</title></path><text x="676.0" y="20" class="val">13</text><text x="252" y="45" class="lbl" text-anchor="end">dados</text><path d="M260,34 H445.2 Q449.2,34 449.2,38 V46 Q449.2,50 445.2,50 H260 Z" class="s1"><title>dados: 6</title></path><text x="455.2" y="46" class="val">6</text><text x="252" y="71" class="lbl" text-anchor="end">redes</text><path d="M260,60 H445.2 Q449.2,60 449.2,64 V72 Q449.2,76 445.2,76 H260 Z" class="s1"><title>redes: 6</title></path><text x="455.2" y="72" class="val">6</text><text x="252" y="97" class="lbl" text-anchor="end">sistemas</text><path d="M260,86 H382.2 Q386.2,86 386.2,90 V98 Q386.2,102 382.2,102 H260 Z" class="s1"><title>sistemas: 4</title></path><text x="392.2" y="98" class="val">4</text><text x="252" y="123" class="lbl" text-anchor="end">recomendação</text><path d="M260,112 H382.2 Q386.2,112 386.2,116 V124 Q386.2,128 382.2,128 H260 Z" class="s1"><title>recomendação: 4</title></path><text x="392.2" y="124" class="val">4</text><text x="252" y="149" class="lbl" text-anchor="end">edge-cloud</text><path d="M260,138 H382.2 Q386.2,138 386.2,142 V150 Q386.2,154 382.2,154 H260 Z" class="s1"><title>edge-cloud: 4</title></path><text x="392.2" y="150" class="val">4</text><text x="252" y="175" class="lbl" text-anchor="end">requisitos</text><path d="M260,164 H382.2 Q386.2,164 386.2,168 V176 Q386.2,180 382.2,180 H260 Z" class="s1"><title>requisitos: 4</title></path><text x="392.2" y="176" class="val">4</text><text x="252" y="201" class="lbl" text-anchor="end">engenharia</text><path d="M260,190 H382.2 Q386.2,190 386.2,194 V202 Q386.2,206 382.2,206 H260 Z" class="s1"><title>engenharia: 4</title></path><text x="392.2" y="202" class="val">4</text><text x="252" y="227" class="lbl" text-anchor="end">recursos</text><path d="M260,216 H350.6 Q354.6,216 354.6,220 V228 Q354.6,232 350.6,232 H260 Z" class="s1"><title>recursos: 3</title></path><text x="360.6" y="228" class="val">3</text><text x="252" y="253" class="lbl" text-anchor="end">desenvolvimento</text><path d="M260,242 H350.6 Q354.6,242 354.6,246 V254 Q354.6,258 350.6,258 H260 Z" class="s1"><title>desenvolvimento: 3</title></path><text x="360.6" y="254" class="val">3</text><text x="252" y="279" class="lbl" text-anchor="end">competências</text><path d="M260,268 H350.6 Q354.6,268 354.6,272 V280 Q354.6,284 350.6,284 H260 Z" class="s1"><title>competências: 3</title></path><text x="360.6" y="280" class="val">3</text><text x="252" y="305" class="lbl" text-anchor="end">understanding</text><path d="M260,294 H350.6 Q354.6,294 354.6,298 V306 Q354.6,310 350.6,310 H260 Z" class="s1"><title>understanding: 3</title></path><text x="360.6" y="306" class="val">3</text><text x="252" y="331" class="lbl" text-anchor="end">explorando</text><path d="M260,320 H350.6 Q354.6,320 354.6,324 V332 Q354.6,336 350.6,336 H260 Z" class="s1"><title>explorando: 3</title></path><text x="360.6" y="332" class="val">3</text><text x="252" y="357" class="lbl" text-anchor="end">iot</text><path d="M260,346 H350.6 Q354.6,346 354.6,350 V358 Q354.6,362 350.6,362 H260 Z" class="s1"><title>iot: 3</title></path><text x="360.6" y="358" class="val">3</text><text x="252" y="383" class="lbl" text-anchor="end">sistema</text><path d="M260,372 H350.6 Q354.6,372 354.6,376 V384 Q354.6,388 350.6,388 H260 Z" class="s1"><title>sistema: 3</title></path><text x="360.6" y="384" class="val">3</text><text x="252" y="409" class="lbl" text-anchor="end">escalonamento</text><path d="M260,398 H350.6 Q354.6,398 354.6,402 V410 Q354.6,414 350.6,414 H260 Z" class="s1"><title>escalonamento: 3</title></path><text x="360.6" y="410" class="val">3</text><text x="252" y="435" class="lbl" text-anchor="end">nomeados</text><path d="M260,424 H350.6 Q354.6,424 354.6,428 V436 Q354.6,440 350.6,440 H260 Z" class="s1"><title>nomeados: 3</title></path><text x="360.6" y="436" class="val">3</text><text x="252" y="461" class="lbl" text-anchor="end">integrando</text><path d="M260,450 H319.1 Q323.1,450 323.1,454 V462 Q323.1,466 319.1,466 H260 Z" class="s1"><title>integrando: 2</title></path><text x="329.1" y="462" class="val">2</text><text x="252" y="487" class="lbl" text-anchor="end">confiança</text><path d="M260,476 H319.1 Q323.1,476 323.1,480 V488 Q323.1,492 319.1,492 H260 Z" class="s1"><title>confiança: 2</title></path><text x="329.1" y="488" class="val">2</text><text x="252" y="513" class="lbl" text-anchor="end">modelos</text><path d="M260,502 H319.1 Q323.1,502 323.1,506 V514 Q323.1,518 319.1,518 H260 Z" class="s1"><title>modelos: 2</title></path><text x="329.1" y="514" class="val">2</text></svg>
+<h3>Títulos em inglês por ano</h3>
+<svg viewBox="0 0 720 60" role="img" class="chart"><text x="252" y="19" class="lbl" text-anchor="end">2025</text><path d="M260,8 H392.7 Q396.7,8 396.7,12 V20 Q396.7,24 392.7,24 H260 Z" class="s1"><title>2025: 13%</title></path><text x="402.7" y="20" class="val">13%</text><text x="252" y="45" class="lbl" text-anchor="end">2026</text><path d="M260,34 H666.0 Q670.0,34 670.0,38 V46 Q670.0,50 666.0,50 H260 Z" class="s1"><title>2026: 39%</title></path><text x="676.0" y="46" class="val">39%</text></svg>
+</section>
+
+<section>
+<h2>7. Resumos (número de palavras)</h2>
+<table class="dataframe tab">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Tipo</th>
+      <th>Média</th>
+      <th>Mediana</th>
+      <th>Mín.</th>
+      <th>Máx.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Dissertações</td>
+      <td>290</td>
+      <td>283</td>
+      <td>172</td>
+      <td>480</td>
+    </tr>
+    <tr>
+      <td>Teses</td>
+      <td>388</td>
+      <td>358</td>
+      <td>220</td>
+      <td>669</td>
+    </tr>
+  </tbody>
+</table>
+</section>
+
+<section>
+<h2>8. Qualidade dos dados</h2>
+<table class="dataframe tab">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Campo</th>
+      <th>Preenchidos</th>
+      <th>Vazios</th>
+      <th>% preenchido</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Discente</td>
+      <td>53</td>
+      <td>0</td>
+      <td>100,0%</td>
+    </tr>
+    <tr>
+      <td>Título</td>
+      <td>53</td>
+      <td>0</td>
+      <td>100,0%</td>
+    </tr>
+    <tr>
+      <td>Orientador</td>
+      <td>53</td>
+      <td>0</td>
+      <td>100,0%</td>
+    </tr>
+    <tr>
+      <td>Banca</td>
+      <td>53</td>
+      <td>0</td>
+      <td>100,0%</td>
+    </tr>
+    <tr>
+      <td>Data</td>
+      <td>53</td>
+      <td>0</td>
+      <td>100,0%</td>
+    </tr>
+    <tr>
+      <td>Resumo (português)</td>
+      <td>53</td>
+      <td>0</td>
+      <td>100,0%</td>
+    </tr>
+    <tr>
+      <td>Abstract (resumo em inglês)</td>
+      <td>53</td>
+      <td>0</td>
+      <td>100,0%</td>
+    </tr>
+    <tr>
+      <td>Link da ata assinada</td>
+      <td>2</td>
+      <td>51</td>
+      <td>3,8%</td>
+    </tr>
+  </tbody>
+</table>
+<p class="nota">Todas as 53 defesas têm resumo em português. O único abstract vazio é o de
+—: no próprio SIGAA o campo está em branco.
+O link da ata assinada só existe nas defesas que o publicaram no SIGAA. Nomes foram agrupados
+sem acento e sem diferença de maiúsculas, porque o sistema usa grafias diferentes para a mesma pessoa.</p>
+</section>
+<section><h2>9. Lista das defesas (53)</h2><p class="nota">Em ordem de data.</p><table class="dataframe tab">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Data</th>
+      <th>Tipo</th>
+      <th>Discente</th>
+      <th>Título</th>
+      <th>Orientador</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>24/02/2025</td>
+      <td>Dissertação</td>
+      <td>Mayki dos Santos Oliveira</td>
+      <td>Um Sistema de Recomendação para Casas Inteligentes baseado em Grupos</td>
+      <td>Frederico Araujo Durao</td>
+    </tr>
+    <tr>
+      <td>26/03/2025</td>
+      <td>Dissertação</td>
+      <td>Andressa Mirella Filgueiras da Silva</td>
+      <td>ENSINO DE PROGRAMAÇÃO POR MEIO DA ROBÓTICA EDUCACIONAL: CONTEXTO DOS ESTUDANTES DO CURSO TÉCNICO DE INFORMÁTICA DO CETEP/LNAB</td>
+      <td>Marlo Vieira dos Santos e Souza</td>
+    </tr>
+    <tr>
+      <td>27/03/2025</td>
+      <td>Tese</td>
+      <td>Tadeu Nogueira Costa de Andrade</td>
+      <td>Métodos Estatísticos e de Inteligência Computacional para Análise Temporal em Sistemas de Tempo Real</td>
+      <td>George Marconi de Araujo Lima</td>
+    </tr>
+    <tr>
+      <td>16/05/2025</td>
+      <td>Tese</td>
+      <td>Larissa Barbosa Leoncio Pinheiro</td>
+      <td>ORGANIZAÇÃO DO CENÁRIO DE GERENCIAMENTO DE DÍVIDA TËCNICA PARA DÉBITO DE REQUISITOS: ASPECTOS TÉCNICOS E HUMANOS</td>
+      <td>Rita Suzana Pitangueira Maciel</td>
+    </tr>
+    <tr>
+      <td>05/06/2025</td>
+      <td>Dissertação</td>
+      <td>Juliana Conceição Santos</td>
+      <td>Process Checklist: Checklist Orientado à Transparência para Inspeção de Processos BPMN</td>
+      <td>Rita Suzana Pitangueira Maciel</td>
+    </tr>
+    <tr>
+      <td>05/06/2025</td>
+      <td>Dissertação</td>
+      <td>Cleiton Otavio da Exaltação Rocha</td>
+      <td>Detecção de empresas potencialmente não confiáveis por meio de extratos de compras governamentais: uma aplicação com modelos de linguagem natural</td>
+      <td>Gecynalda Soares da Silva Gomes</td>
+    </tr>
+    <tr>
+      <td>16/06/2025</td>
+      <td>Dissertação</td>
+      <td>Jéssica de Souza Santana</td>
+      <td>Processo de Especificação de Competências Educacionais com Representação no Padrão de Metadados LOMc</td>
+      <td>Lais do Nascimento Salvador</td>
+    </tr>
+    <tr>
+      <td>18/06/2025</td>
+      <td>Tese</td>
+      <td>Diego Corrêa da Silva</td>
+      <td>Explorando a calibração como um sistema de recomendação multiobjetivo</td>
+      <td>Frederico Araujo Durao</td>
+    </tr>
+    <tr>
+      <td>15/07/2025</td>
+      <td>Tese</td>
+      <td>Diego Zabot</td>
+      <td>Game codesign como estratégia pedagógica para a Educação Infantil: uma proposta inspirada no design de interação semioparticipativo</td>
+      <td>Ecivaldo de Souza Matos</td>
+    </tr>
+    <tr>
+      <td>21/07/2025</td>
+      <td>Dissertação</td>
+      <td>Vítor Alves Barbosa</td>
+      <td>Abordagens exatas e heurísticas para o problema de coleta e entrega com janelas de tempo e escalonamento nas bordas e para o problema de escalonamento de tarefas acopladas a uma única máquina com atrasos exatos</td>
+      <td>Rafael Augusto de Melo</td>
+    </tr>
+    <tr>
+      <td>21/07/2025</td>
+      <td>Tese</td>
+      <td>Lidiany Cerqueira Santos</td>
+      <td>Desenvolvimento de software guiado por empatia: uma estrutura conceitual de empatia na engenharia de software</td>
+      <td>Manoel Gomes de Mendonca Neto</td>
+    </tr>
+    <tr>
+      <td>24/07/2025</td>
+      <td>Dissertação</td>
+      <td>Victor Soares Cardel</td>
+      <td>Uma Revisão Sistemática e Projeto de Funções de Escalonamento Baseado em Q-Learning para Redes 6TiSCH.</td>
+      <td>Bruno Pereira dos Santos</td>
+    </tr>
+    <tr>
+      <td>30/07/2025</td>
+      <td>Dissertação</td>
+      <td>Ricardo Gomes de Oliveira</td>
+      <td>AVALIAÇÃO DE PADRÕES GRAMATICAIS EM TRANSFORMERS NA LÍNGUA PORTUGUESA: UM ESTUDO SOBRE CABEÇAS DE ATENÇÃO</td>
+      <td>Daniela Barreiro Claro</td>
+    </tr>
+    <tr>
+      <td>09/09/2025</td>
+      <td>Dissertação</td>
+      <td>Lucas Mascarenhas Almeida</td>
+      <td>Tetris: uma estratégia de alocação de aplicações consciente de SLA no continuum Edge-Cloud</td>
+      <td>Maycon Leone Maciel Peixoto</td>
+    </tr>
+    <tr>
+      <td>15/09/2025</td>
+      <td>Tese</td>
+      <td>Bruno Souza Cabral</td>
+      <td>Evolving Open Information Extraction for Portuguese employing Language Models</td>
+      <td>Daniela Barreiro Claro</td>
+    </tr>
+    <tr>
+      <td>15/09/2025</td>
+      <td>Dissertação</td>
+      <td>Fabio Santos dos Santos</td>
+      <td>Explorando Estruturas de Dados Probabilålisticas na Otimização de Rotas de Múltiplos Caminhos em Redes de Dados Nomeados</td>
+      <td>Leobino Nascimento Sampaio</td>
+    </tr>
+    <tr>
+      <td>15/09/2025</td>
+      <td>Dissertação</td>
+      <td>Marcelo Pereira Barbosa</td>
+      <td>Engenharia da confiança: requisitos de software para fortalecer as conexões entre os alunos em ambientes de aprendizagem virtuais</td>
+      <td>Rita Suzana Pitangueira Maciel</td>
+    </tr>
+    <tr>
+      <td>18/09/2025</td>
+      <td>Dissertação</td>
+      <td>Tania Maria Feitosa</td>
+      <td>HIBRIDIZAÇÃO NO DESENVOLVIMENTO DE SOFTWARE COM SCRUM: UM ESTUDO QUALITATIVO COM RECOMENDAÇÕES</td>
+      <td>Rita Suzana Pitangueira Maciel</td>
+    </tr>
+    <tr>
+      <td>30/09/2025</td>
+      <td>Tese</td>
+      <td>Jauberth Weyll Abijaude</td>
+      <td>Integrando a Blochain à Cadeia de Produção por meio de IoT: Caso de Uso da Indústria do Cacau</td>
+      <td>George Marconi de Araujo Lima</td>
+    </tr>
+    <tr>
+      <td>05/11/2025</td>
+      <td>Dissertação</td>
+      <td>Sandro de Carvalho Franco</td>
+      <td>ONTOVID II: Uma solução baseada em Grafos de Conhecimento Semântico para Integração de Dados de Saúde Pública</td>
+      <td>Lais do Nascimento Salvador</td>
+    </tr>
+    <tr>
+      <td>07/11/2025</td>
+      <td>Dissertação</td>
+      <td>Dhyego Tavares Moreira da Cruz</td>
+      <td>Effects of Music on Brain Activity and Performance of Software Testing Professionals: An Experimental Study with EEG</td>
+      <td>Eduardo Santana de Almeida</td>
+    </tr>
+    <tr>
+      <td>18/11/2025</td>
+      <td>Tese</td>
+      <td>George Pacheco Pinto</td>
+      <td>FoT-PDS: Um Paradigma Centrado no Usuário para IoT com Preservação de Privacidade</td>
+      <td>Cassio Vinicius Serafim Prazeres</td>
+    </tr>
+    <tr>
+      <td>27/11/2025</td>
+      <td>Dissertação</td>
+      <td>Marcos Vinícius Queiroz de Sant'ana Filho</td>
+      <td>Paperman - Um Sistema de Recomendação de Artigos Científicos</td>
+      <td>Frederico Araujo Durao</td>
+    </tr>
+    <tr>
+      <td>02/12/2025</td>
+      <td>Tese</td>
+      <td>Mayka de Souza Lima</td>
+      <td>FRAMEWORK CONCEITUAL PARA O DESENHO INSTRUCCIONAL DE CURSOS EM AMBIENTES VIRTUAIS DE APRENDIZAGEM</td>
+      <td>Rita Suzana Pitangueira Maciel</td>
+    </tr>
+    <tr>
+      <td>10/12/2025</td>
+      <td>Dissertação</td>
+      <td>Silvio José de Queiroz Pereira</td>
+      <td>ChainID: Plataforma Para Gestão de Identidades Descentralizadas Baseada em Blockchain</td>
+      <td>Leobino Nascimento Sampaio</td>
+    </tr>
+    <tr>
+      <td>12/12/2025</td>
+      <td>Tese</td>
+      <td>Guilherme Braga Araújo</td>
+      <td>Alavando Redes de Dados Nomeados para Aplicações Veiculares e de Computação de Borda</td>
+      <td>Leobino Nascimento Sampaio</td>
+    </tr>
+    <tr>
+      <td>15/12/2025</td>
+      <td>Dissertação</td>
+      <td>Edlane Cristine dos Santos Proencia</td>
+      <td>Interoperabilidade Organizacional no Contexto dos Sistemas de Sistemas de Informação: Uma Abordagem Colaborativa</td>
+      <td>Rita Suzana Pitangueira Maciel</td>
+    </tr>
+    <tr>
+      <td>16/12/2025</td>
+      <td>Tese</td>
+      <td>Francisco Renato Cavalcante Araújo</td>
+      <td>Diferenciação de Serviços em Redes de Dados Nomeados: Novas Perspectivas através da Semântica de Nomeação, do Cache e da Manutenção de Estados</td>
+      <td>Leobino Nascimento Sampaio</td>
+    </tr>
+    <tr>
+      <td>17/12/2025</td>
+      <td>Dissertação</td>
+      <td>Juvenal Bruno Andrade da Silva</td>
+      <td>MoTSPPP: Multi-objective Traveling Salesman Problem with Profits and Passengers</td>
+      <td>Islame Felipe da Costa Fernandes</td>
+    </tr>
+    <tr>
+      <td>18/12/2025</td>
+      <td>Dissertação</td>
+      <td>Matheus Augusto Oliveira dos Santos</td>
+      <td>Prototypical Linear Mapping from Vision Foundation Models for Histopathology Image Retrieval</td>
+      <td>Luciano Reboucas de Oliveira</td>
+    </tr>
+    <tr>
+      <td>14/01/2026</td>
+      <td>Tese</td>
+      <td>Beatriz Silva de Santana</td>
+      <td>Desvendando a Segurança Psicológica na Engenharia de Software: Insights Empíricos</td>
+      <td>Manoel Gomes de Mendonca Neto</td>
+    </tr>
+    <tr>
+      <td>20/01/2026</td>
+      <td>Dissertação</td>
+      <td>Joel Machado Pires</td>
+      <td>Integrando Confiança em Modelos Baseados em Embeddings para Learn-to-Rank em Sistemas de Recomendação</td>
+      <td>Frederico Araujo Durao</td>
+    </tr>
+    <tr>
+      <td>04/03/2026</td>
+      <td>Tese</td>
+      <td>Paulo Roberto de Souza</td>
+      <td>Explorando o Capital Social para Melhorar Recomendações Personalizadas em Redes Sociais Online</td>
+      <td>Frederico Araujo Durao</td>
+    </tr>
+    <tr>
+      <td>24/03/2026</td>
+      <td>Dissertação</td>
+      <td>Elen Margareth Reis de Jesus</td>
+      <td>AgileFlow: Um processo de software para Bahia Robotics Team</td>
+      <td>Rita Suzana Pitangueira Maciel</td>
+    </tr>
+    <tr>
+      <td>08/04/2026</td>
+      <td>Tese</td>
+      <td>Brenno de Mello Alencar</td>
+      <td>EFFICIENT DELAY-AWARE EXPERIENCE REPLAY FOR ONLINE CONTINUAL LEARNING UNDER DELAYED LABEL STREAMS</td>
+      <td>Ricardo Araujo Rios</td>
+    </tr>
+    <tr>
+      <td>10/04/2026</td>
+      <td>Tese</td>
+      <td>Marcos Vinicius dos Santos Ferreira</td>
+      <td>Geometries of Time: Spatiotemporal Modeling of Chaotic Attractors Using Fuzzy and Graphs</td>
+      <td>Ricardo Araujo Rios</td>
+    </tr>
+    <tr>
+      <td>05/05/2026</td>
+      <td>Dissertação</td>
+      <td>Giselly Alves Reis</td>
+      <td>ELSA: Uma Abordagem Orientada à Eficiência Energética e Sensível à Latência para Alocação de Recursos no Edge-Cloud Continuum</td>
+      <td>Maycon Leone Maciel Peixoto</td>
+    </tr>
+    <tr>
+      <td>19/05/2026</td>
+      <td>Dissertação</td>
+      <td>Rodrigo Almeida Bezerra</td>
+      <td>HERMES: Orquestração de Recursos no Contínuo Edge-Cloud com Suporte à Mobilidade</td>
+      <td>Maycon Leone Maciel Peixoto</td>
+    </tr>
+    <tr>
+      <td>19/05/2026</td>
+      <td>Dissertação</td>
+      <td>Rodrigo Almeida Bezerra</td>
+      <td>HERMES: Orquestração de Recursos no Contínuo Edge-Cloud com Suporte à Mobilidade</td>
+      <td>Maycon Leone Maciel Peixoto</td>
+    </tr>
+    <tr>
+      <td>06/07/2026</td>
+      <td>Tese</td>
+      <td>Nilson Rodrigues Sousa</td>
+      <td>A Reference Architecture for IoT Device Management in Smart Cities</td>
+      <td>Cassio Vinicius Serafim Prazeres</td>
+    </tr>
+    <tr>
+      <td>30/07/2026</td>
+      <td>Dissertação</td>
+      <td>Eronildo José da Silva Junior</td>
+      <td>Test Smells in Dart Projects: An Empirical Study and a Validated Catalog</td>
+      <td>Ivan do Carmo Machado</td>
+    </tr>
+    <tr>
+      <td>03/08/2026</td>
+      <td>Dissertação</td>
+      <td>Camila Ellen de Almeida Rodrigues</td>
+      <td>De Entrevistas a Requisitos de Software: Um Método Estruturado para a Geração de Requisitos Assistida por LLM a partir de Transcrições de Entrevistas com Stakeholders</td>
+      <td>Manoel Gomes de Mendonca Neto</td>
+    </tr>
+    <tr>
+      <td>04/08/2026</td>
+      <td>Dissertação</td>
+      <td>Gilberto de Souza Leite</td>
+      <td>Gerenciamento da Dívida Técnica no Desenvolvimento Ágil de Software: Práticas e Evidências Experimentais sobre o Diagrama IDEA</td>
+      <td>Manoel Gomes de Mendonca Neto</td>
+    </tr>
+    <tr>
+      <td>05/08/2026</td>
+      <td>Dissertação</td>
+      <td>Jorge Luis da Silva Batista Filho</td>
+      <td>AUMENTO DE DADOS SINTÉTICOS PARA A DETECÇÃO DE PLASMÓCITOS EM ESFREGAÇOS DE MEDULA ÓSSEA</td>
+      <td>Ricardo Araujo Rios</td>
+    </tr>
+    <tr>
+      <td>10/08/2026</td>
+      <td>Dissertação</td>
+      <td>Lucas de Andrade Lima</td>
+      <td>Avaliação de desempenho de métodos de predição de tráfego para redução de atraso em redes PON com DBAs dinâmicos</td>
+      <td>Gustavo Bittencourt Figueiredo</td>
+    </tr>
+    <tr>
+      <td>13/08/2026</td>
+      <td>Dissertação</td>
+      <td>Clara Bacellar Berenguer Lêdo</td>
+      <td>De anúncios de vagas a competências: um estudo empírico de cargos de nível inicial em gestão de projetos de software</td>
+      <td>Manoel Gomes de Mendonca Neto</td>
+    </tr>
+    <tr>
+      <td>17/08/2026</td>
+      <td>Dissertação</td>
+      <td>Gabriel Benjamin Lemos</td>
+      <td>Understanding Multi-Agent Debate for Architectural Decision Making</td>
+      <td>Eduardo Santana de Almeida</td>
+    </tr>
+    <tr>
+      <td>22/09/2026</td>
+      <td>Tese</td>
+      <td>Fernanda Gomes Silva</td>
+      <td>Adoção de Projetos de Software de Código Aberto no Ensino Superior de Engenharia de Software: Uma Abordagem Baseada no Perfil do Instrutor</td>
+      <td>Christina Von Flach Garcia Chavez</td>
+    </tr>
+    <tr>
+      <td>22/09/2026</td>
+      <td>Dissertação</td>
+      <td>Erlon Pereira Almeida</td>
+      <td>MUTEVO-LM: LLM-BASED MUTANT GENERATION FROM SOFTWARE EVOLUTION HISTORY</td>
+      <td>Eduardo Santana de Almeida</td>
+    </tr>
+    <tr>
+      <td>29/09/2026</td>
+      <td>Dissertação</td>
+      <td>Roberta Mercia Rodrigues de Oliveira</td>
+      <td>Matriz de Competências para o Pensamento Computacional: Construção e Validação com Base no Modelo CHA e na BNCC Computação</td>
+      <td>Lais do Nascimento Salvador</td>
+    </tr>
+    <tr>
+      <td>03/11/2026</td>
+      <td>Dissertação</td>
+      <td>Thiago Santana Vaillant</td>
+      <td>From Entailment to Understanding: A Domain-Agnostic Approach to Intent Recognition and Slot Filling Without Fine-Tuning</td>
+      <td>Eduardo Santana de Almeida</td>
+    </tr>
+    <tr>
+      <td>12/11/2026</td>
+      <td>Dissertação</td>
+      <td>Jander Pereira Santos Júnior</td>
+      <td>Understanding the Design of Edge AI-based Systems</td>
+      <td>Eduardo Santana de Almeida</td>
+    </tr>
+    <tr>
+      <td>26/11/2026</td>
+      <td>Dissertação</td>
+      <td>Felipe de Sant'anna Paixão</td>
+      <td>An Empirical Study of Configuration-Dependent Vulnerabilities in Highly Configurable Systems</td>
+      <td>Eduardo Santana de Almeida</td>
+    </tr>
+  </tbody>
+</table></section>
+</main></body></html>

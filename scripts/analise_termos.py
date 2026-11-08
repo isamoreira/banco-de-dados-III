@@ -284,6 +284,37 @@ tab_ex = "".join(f"<tr><td>{esc(r['Título'])}<small>{esc(r['Tipo'])} · {r['Ano
                  f"<td>{esc(r['Termos (TF-IDF)'])}</td></tr>" for _, r in exemplos.iterrows())
 
 n_expr = sum(" " in t for t in vocab)
+
+# ---- exemplo real do cálculo, para a seção explicativa
+alvo = "sistemas de recomendação" if "sistemas de recomendação" in idx else vocab[int(np.argmax(X.max(axis=0)))]
+i_ex = int(np.argmax(X[:, idx[alvo]]))
+cont_ex = Counter(t for t in docs[i_ex] if t in idx)
+tot_ex = sum(cont_ex.values())
+presentes_ex = list(cont_ex)
+comum = max(presentes_ex, key=lambda t: df_cont[t])          # o termo mais comum no programa
+raro = max(presentes_ex, key=lambda t: X[i_ex, idx[t]])      # o de maior peso nesta defesa
+norma_ex = float(np.linalg.norm(np.array([cont_ex[t] / tot_ex * idf[idx[t]] for t in presentes_ex])))
+linhas_ex = []
+for t in dict.fromkeys([raro, alvo, comum]):
+    j = idx[t]
+    tf = cont_ex[t] / tot_ex
+    linhas_ex.append((t, cont_ex[t], tf, df_cont[t], idf[j], tf * idf[j], X[i_ex, j]))
+tit_ex = d.loc[i_ex, "Título"]
+pos_ex = int((X[i_ex] > 0).sum())
+
+
+def f2(x, casas=3):
+    return f"{x:.{casas}f}".replace(".", ",")
+
+
+tab_calc = "".join(
+    f"<tr><td><b>{esc(t)}</b></td><td class='n'>{n}</td><td class='n'>{n}/{tot_ex} = {f2(tf)}</td>"
+    f"<td class='n'>{dfc}</td><td class='n'>{f2(iv, 2)}</td><td class='n'>{f2(w)}</td><td class='n'><b>{f2(wn)}</b></td></tr>"
+    for t, n, tf, dfc, iv, w, wn in linhas_ex)
+(t_r, n_r, tf_r, df_r, idf_r, w_r, wn_r) = linhas_ex[0]
+(t_c, n_c, tf_c, df_c, idf_c, w_c, wn_c) = linhas_ex[-1]
+idf_max = np.log((1 + N) / (1 + 3)) + 1
+idf_min = np.log((1 + N) / (1 + 0.4 * N)) + 1
 corpo = f"""
 <header>
   <p class="eyebrow">Análise de termos · TF-IDF</p>
@@ -293,12 +324,71 @@ corpo = f"""
 </header>
 
 <section>
-<h2>Como ler</h2>
-<p>Cada defesa foi transformada num texto com o título (contado duas vezes) e o resumo. Dele saem palavras e
-expressões como <i>sistemas de recomendação</i>, sem artigos, preposições e palavras comuns a qualquer texto
-acadêmico (<i>trabalho</i>, <i>resultados</i>, <i>proposta</i>). O <b>TF-IDF</b> dá peso alto ao termo que
-aparece muito num trabalho e em poucos outros, por isso destaca o que é específico de cada trabalho.
-O número ao lado de cada termo é a quantidade de defesas que o usam.</p>
+<h2>O que é TF-IDF</h2>
+<p>Contar palavras sozinho engana: as palavras que mais aparecem num resumo costumam ser as que aparecem em
+quase todos (<i>sistema</i>, <i>dados</i>, <i>desempenho</i>), e por isso não dizem do que aquele trabalho
+trata. O <b>TF-IDF</b> (<i>term frequency – inverse document frequency</i>, frequência do termo × inverso da
+frequência nos documentos) corrige isso multiplicando duas medidas:</p>
+<div class="formula">
+  <p><b>TF</b>: quanto o termo aparece <i>neste</i> trabalho<br>
+  <code>tf = vezes que o termo aparece no texto ÷ total de termos do texto</code></p>
+  <p><b>IDF</b>: quão raro o termo é <i>no conjunto</i> das {N} defesas<br>
+  <code>idf = ln( (1 + {N}) ÷ (1 + nº de defesas que usam o termo) ) + 1</code></p>
+  <p><b>Peso</b> = <code>tf × idf</code></p>
+</div>
+<p>Um termo ganha peso alto quando aparece bastante num trabalho <b>e</b> em poucos outros. Neste conjunto o
+idf vai de {f2(idf_max, 2)}, para um termo usado em só 3 defesas, até {f2(idf_min, 2)}, para um termo usado em
+40% delas. Ou seja, um termo raro vale cerca de {idf_max / idf_min:.0f} vezes mais que um termo muito comum
+que apareça o mesmo número de vezes.</p>
+
+<h3>Exemplo com uma defesa real</h3>
+<p class="nota">“{esc(tit_ex)}” ({esc(d.loc[i_ex, 'Tipo1'])}, {d.loc[i_ex, 'Ano']}). O texto dessa defesa tem
+{tot_ex} ocorrências de termos do vocabulário, de {pos_ex} termos diferentes.</p>
+<div class="tab-wrap"><table class="tab">
+  <thead><tr><th>Termo</th><th class="n">Vezes no texto</th><th class="n">tf</th><th class="n">Defesas que usam</th>
+  <th class="n">idf</th><th class="n">tf × idf</th><th class="n">Peso final</th></tr></thead>
+  <tbody>{tab_calc}</tbody>
+</table></div>
+<p><i>{esc(t_c)}</i> é usado em {df_c} defesas, por isso tem idf baixo ({f2(idf_c, 2)}) e fica com peso
+{f2(wn_c)}. <i>{esc(t_r)}</i> aparece em só {df_r}, tem idf {f2(idf_r, 2)} e chega a {f2(wn_r)}: fica entre os
+termos que mais descrevem o trabalho. O <b>peso final</b> divide cada tf × idf pelo “tamanho” do conjunto de pesos da defesa
+(a raiz da soma dos quadrados, aqui {f2(norma_ex)}). Assim um resumo longo não ganha mais peso que um curto,
+e os pesos de defesas diferentes podem ser comparados.</p>
+</section>
+
+<section>
+<h2>Como o script funciona</h2>
+<p>O código está em <code>scripts/analise_termos.py</code> e roda com
+<code>python scripts/analise_termos.py</code>. Ele faz, em ordem:</p>
+<ol class="passos">
+  <li><b>Lê os dados</b> de <code>dados/defesas_1820.csv</code>, gerado pelo scraping do SIGAA: {N} defesas.</li>
+  <li><b>Monta um texto por defesa</b>: título + título + resumo em português. O título entra duas vezes
+      porque resume o trabalho em poucas palavras.</li>
+  <li><b>Quebra o texto em palavras</b>, tudo em minúsculas, mantendo acentos e palavras com hífen
+      (<i>edge-cloud</i>).</li>
+  <li><b>Gera os termos</b>: palavras soltas e expressões de 2 palavras (<i>dívida técnica</i>) ou de 3 no formato
+      “x de y” (<i>internet das coisas</i>). Uma expressão não pode começar nem terminar em palavra ignorada.</li>
+  <li><b>Descarta palavras sem tema</b>: artigos, preposições e verbos auxiliares em português e inglês,
+      palavras de texto acadêmico (<i>trabalho</i>, <i>proposta</i>, <i>resultados</i>) e verbos no gerúndio.
+      Palavras genéricas como <i>sistema</i>, <i>dados</i> e <i>modelo</i> só contam dentro de expressões
+      (<i>conjuntos de dados</i>).</li>
+  <li><b>Monta o vocabulário</b>: só termos usados em pelo menos 3 defesas (para evitar acasos) e em no máximo
+      40% delas (comuns demais para distinguir trabalhos). Sobram {len(vocab):,} termos.</li>
+  <li><b>Calcula a matriz TF-IDF</b>: uma tabela de {N} linhas (defesas) × {len(vocab):,} colunas (termos), com o
+      peso final de cada termo em cada defesa.</li>
+  <li><b>Resume a matriz</b> nas seções abaixo:
+    <ul>
+      <li><b>mais usados</b>: número de defesas que usam o termo (sem TF-IDF, é uma contagem direta);</li>
+      <li><b>em alta e em baixa</b>: percentual de defesas que usam o termo em cada período;</li>
+      <li><b>característicos de um grupo</b> (ano, tipo, orientador): média dos pesos TF-IDF nas defesas do grupo,
+          contando só termos presentes em pelo menos 2 delas, para um único trabalho não dominar o grupo;</li>
+      <li><b>termos de cada defesa</b>: os 8 de maior peso, gravados em <code>dados/termos_por_defesa.csv</code>.</li>
+    </ul>
+  </li>
+</ol>
+<p class="nota">Expressões que repetem outra da mesma lista (<i>recomendação</i> dentro de <i>sistemas de
+recomendação</i>) são mostradas uma vez só. O número ao lado de cada termo nas listas é a quantidade de defesas
+que o usam.</p>
 </section>
 
 <section>
@@ -390,6 +480,11 @@ section{background:var(--card);border:1px solid var(--line);border-radius:10px;p
 .chip small{color:var(--tx2);font-size:11px;font-variant-numeric:tabular-nums}
 .duas{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:20px}
 code{font-size:12px}
+.formula{background:var(--chip);border-radius:8px;padding:12px 16px;margin:12px 0}
+.formula p{margin:6px 0}.formula code{font-size:13px}
+.passos li{margin:8px 0}.passos ul{margin:6px 0}.passos ul li{margin:4px 0}
+.tab-wrap{overflow-x:auto}
+section p{max-width:72ch}
 </style></head><body><main>{{CORPO}}</main></body></html>"""
 
 SAIDA_HTML.write_text(PAGINA.replace("{{CORPO}}", corpo), encoding="utf-8")

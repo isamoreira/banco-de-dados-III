@@ -1,0 +1,665 @@
+<meta name="dash-one-writer">
+<style>
+  .df { font-family: var(--font-anthropic-sans); color: var(--color-fg); display: flex; flex-direction: column; gap: var(--cds-gap-lg); }
+  .df-head { display: flex; flex-direction: column; gap: var(--cds-gap-xs); }
+  .df-title { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+  .df-lead { margin: 0; color: var(--color-fg-muted); font-size: var(--cds-font-size-body); max-width: 70ch; }
+  .df-lead b { color: var(--color-fg); font-weight: 600; }
+
+  .df-filtros { display: flex; flex-wrap: wrap; gap: var(--cds-gap-sm) var(--cds-gap-md); align-items: flex-end; }
+  .df-f { display: flex; flex-direction: column; gap: 4px; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); min-width: 0; }
+  .df-f select { min-width: 9rem; max-width: 100%; }
+  .df-f.df-f-or select { min-width: 14rem; }
+  .df-btn { font: inherit; font-size: var(--cds-font-size-caption); background: transparent; color: var(--color-fg); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-xs) var(--cds-pad-sm); cursor: pointer; }
+  .df-btn:hover { background: var(--color-panel); }
+  .df-btn:focus-visible, .df-tab:focus-visible, .df-search:focus-visible, .df-tl tr:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+
+  .df-tabs { display: flex; gap: var(--cds-gap-md); border-bottom: 1px solid var(--color-border-line); }
+  .df-tab { font: inherit; font-size: var(--cds-font-size-body); background: none; border: 0; border-bottom: 2px solid transparent; color: var(--color-fg-muted); padding: var(--cds-pad-xs) 0; margin-bottom: -1px; cursor: pointer; }
+  .df-tab[aria-selected="true"] { color: var(--color-fg); border-bottom-color: var(--color-fg); font-weight: var(--cds-font-weight-medium); }
+
+  .df-page { display: flex; flex-direction: column; gap: var(--cds-gap-lg); }
+  .df-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr)); gap: var(--cds-gap-md); }
+  .df-kpi { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-md); display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .df-kpi-v { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); font-variant-numeric: tabular-nums; line-height: 1.15; }
+  .df-kpi-l { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+
+  .df-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: var(--cds-gap-md); }
+  .df-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: flex; flex-direction: column; gap: var(--cds-gap-sm); min-width: 0; }
+  .df-card.df-wide { grid-column: 1 / -1; }
+  .df-card h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0; }
+  .df-note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: 0; }
+  .df-leg { display: flex; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .df-leg span { display: inline-flex; align-items: center; gap: 6px; }
+  .df-sw { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+  .df-sw-d { background: var(--df-c1); }
+  .df-sw-t { background: var(--df-c2); }
+
+  .df-chart { position: relative; min-height: 240px; }
+  .df-chart svg { display: block; overflow: visible; }
+  .df-chart .tick-l { fill: var(--color-fg-muted); font-size: 11px; }
+  .df-chart .val-l { fill: var(--color-fg); font-size: 11px; font-variant-numeric: tabular-nums; }
+  .df-chart .grid-l { stroke: var(--cds-chart-grid); stroke-width: 1; }
+  .df-chart .axis-l { stroke: var(--cds-chart-axis); stroke-width: 1; }
+  .df-col { cursor: pointer; }
+  .df-col:hover .df-seg { opacity: .82; }
+
+  .df-hb { position: relative; display: flex; flex-direction: column; gap: 4px; min-height: 120px; }
+  .df-hb-row { display: grid; grid-template-columns: minmax(0, 40%) 1fr auto; align-items: center; gap: var(--cds-gap-sm); font-size: var(--cds-font-size-caption); padding: 1px 0; border-radius: 4px; }
+  .df-hb-row.df-click { cursor: pointer; }
+  .df-hb-row:hover { background: color-mix(in srgb, var(--color-fg) 6%, transparent); }
+  .df-hb-l { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--color-fg); text-align: right; }
+  .df-hb-track { display: flex; gap: 2px; height: 14px; min-width: 0; }
+  .df-hb-seg { height: 100%; }
+  .df-hb-seg:last-child { border-radius: 0 4px 4px 0; }
+  .df-hb-v { font-variant-numeric: tabular-nums; color: var(--color-fg); min-width: 2.2em; text-align: right; }
+
+  .df-tt { position: absolute; z-index: 5; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); white-space: nowrap; }
+  .df-tt .h { color: var(--cds-text-secondary); margin-bottom: 2px; }
+  .df-tt .r { display: flex; align-items: center; gap: 6px; font-variant-numeric: tabular-nums; }
+
+  .df-tab-wrap { overflow-x: auto; }
+  .df-st { border-collapse: collapse; width: 100%; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+  .df-st th, .df-st td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+  .df-st th { color: var(--color-fg-muted); font-weight: var(--cds-font-weight-medium); }
+  .df-st td.n, .df-st th.n { text-align: right; }
+
+  .df-busca { display: flex; flex-wrap: wrap; gap: var(--cds-gap-sm) var(--cds-gap-md); align-items: center; }
+  .df-search { font: inherit; font-size: var(--cds-font-size-body); flex: 1 1 18rem; min-width: 0; max-width: 32rem; padding: var(--cds-pad-xs) var(--cds-pad-sm); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); background: var(--color-bg); color: var(--color-fg); }
+  .df-count { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .df-count b { color: var(--color-fg); }
+  .df-lista { position: relative; min-height: 200px; }
+  .df-scroll { max-height: 70vh; overflow: auto; border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); }
+  .df-tl { border-collapse: collapse; width: 100%; font-size: var(--cds-font-size-caption); }
+  .df-tl th { position: sticky; top: 0; background: var(--color-panel); text-align: left; padding: 0; border-bottom: 1px solid var(--color-border-line); z-index: 1; }
+  .df-tl th button { font: inherit; font-weight: var(--cds-font-weight-medium); color: var(--color-fg-muted); background: none; border: 0; padding: 8px; width: 100%; text-align: left; cursor: pointer; white-space: nowrap; }
+  .df-tl th[aria-sort] button { color: var(--color-fg); }
+  .df-tl td { padding: 8px; border-bottom: 1px solid var(--color-border-line); vertical-align: top; }
+  .df-tl tbody tr { cursor: pointer; }
+  .df-tl tbody tr:hover, .df-tl tbody tr.on { background: color-mix(in srgb, var(--color-fg) 6%, transparent); }
+  .df-tl td.c-data { white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .df-tl td.c-tit { min-width: 16rem; }
+  .df-pill { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 11px; white-space: nowrap; border: 1px solid currentColor; }
+  .df-pill.t { color: var(--df-c2); }
+  .df-pill.d { color: var(--df-c1); }
+  .df-empty { padding: var(--cds-pad-lg); color: var(--color-fg-muted); text-align: center; }
+
+  .df-pop { position: absolute; left: 0; right: 0; margin-inline: auto; width: min(100%, 44rem); z-index: 6; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-md) var(--cds-pad-lg); max-height: 26rem; overflow: auto; font-size: var(--cds-font-size-body); }
+  .df-pop h3 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0 2rem var(--cds-gap-xs) 0; text-wrap: balance; }
+  .df-pop .meta { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: 0 0 var(--cds-gap-sm); line-height: 1.5; }
+  .df-pop h4 { font-size: var(--cds-font-size-caption); text-transform: uppercase; letter-spacing: .06em; color: var(--color-fg-muted); margin: var(--cds-gap-md) 0 4px; font-weight: var(--cds-font-weight-medium); }
+  .df-pop p.txt { margin: 0; line-height: 1.6; max-width: 70ch; }
+  .df-pop .x { position: absolute; top: 8px; right: 8px; font: inherit; font-size: 18px; line-height: 1; background: none; border: 0; color: var(--color-fg-muted); cursor: pointer; padding: 4px 8px; }
+  .df-pop a { color: inherit; }
+
+  [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+  [data-dash-source-state=empty] { color: transparent; }
+
+  @media (max-width: 640px) {
+    .df-tl .c-tipo, .df-tl .c-or { display: none; }
+    .df-f select, .df-f.df-f-or select { min-width: 0; width: 100%; }
+    .df-f { flex: 1 1 8rem; }
+  }
+</style>
+
+<div class="df" id="defesas-dash">
+  <header class="df-head">
+    <h1 class="df-title">Defesas de pós-graduação UFBA</h1>
+    <p class="df-lead">Dissertações e teses publicadas no SIGAA (programa id 1820). <span data-draw="recorte" data-source="defesas">—</span></p>
+  </header>
+
+  <div class="df-filtros" id="filtros" role="group" aria-label="Filtros">
+    <label class="df-f">Ano
+      <select class="dash-select" id="f-ano" data-draw="opt-ano" data-source="defesas" aria-label="Ano"></select>
+    </label>
+    <label class="df-f">Tipo
+      <select class="dash-select" id="f-tipo" aria-label="Tipo">
+        <option value="">Todos</option>
+        <option value="Dissertação">Dissertação</option>
+        <option value="Tese">Tese</option>
+      </select>
+    </label>
+    <label class="df-f df-f-or">Orientador
+      <select class="dash-select" id="f-or" data-draw="opt-or" data-source="defesas" aria-label="Orientador"></select>
+    </label>
+    <button class="df-btn" id="f-limpar" type="button">Limpar filtros</button>
+  </div>
+
+  <nav class="df-tabs" role="tablist" aria-label="Seções">
+    <button class="df-tab" role="tab" id="tab-visao-geral" data-aba="visao-geral" aria-selected="true" type="button">Visão geral</button>
+    <button class="df-tab" role="tab" id="tab-lista" data-aba="lista" aria-selected="false" type="button">Teses e dissertações</button>
+  </nav>
+
+  <section class="df-page" id="visao-geral" data-pagina="visao-geral" aria-labelledby="tab-visao-geral">
+    <div class="df-kpis" id="kpis">
+      <div class="df-kpi"><span class="df-kpi-v" data-draw="kpi" data-kpi="total" data-source="defesas">—</span><span class="df-kpi-l">defesas</span></div>
+      <div class="df-kpi"><span class="df-kpi-v" data-draw="kpi" data-kpi="diss" data-source="defesas">—</span><span class="df-kpi-l">dissertações</span></div>
+      <div class="df-kpi"><span class="df-kpi-v" data-draw="kpi" data-kpi="teses" data-source="defesas">—</span><span class="df-kpi-l">teses</span></div>
+      <div class="df-kpi"><span class="df-kpi-v" data-draw="kpi" data-kpi="orient" data-source="defesas">—</span><span class="df-kpi-l">orientadores</span></div>
+      <div class="df-kpi"><span class="df-kpi-v" data-draw="kpi" data-kpi="banca" data-source="defesas">—</span><span class="df-kpi-l">membros por banca (média)</span></div>
+      <div class="df-kpi"><span class="df-kpi-v" data-draw="kpi" data-kpi="ingles" data-source="defesas">—</span><span class="df-kpi-l">títulos em inglês</span></div>
+    </div>
+
+    <div class="df-grid">
+      <article class="df-card df-wide" id="card-ano">
+        <h2>Defesas por ano</h2>
+        <p class="df-note">Clique numa coluna para filtrar pelo ano.</p>
+        <div class="df-leg"><span><i class="df-sw df-sw-d"></i>Dissertação</span><span><i class="df-sw df-sw-t"></i>Tese</span></div>
+        <div class="df-chart" id="chart-ano" data-draw="chart" data-chart="ano" data-source="defesas"></div>
+      </article>
+
+      <article class="df-card" id="card-mes">
+        <h2>Defesas por mês</h2>
+        <p class="df-note">Todos os anos do recorte somados, pela data da defesa.</p>
+        <div class="df-leg"><span><i class="df-sw df-sw-d"></i>Dissertação</span><span><i class="df-sw df-sw-t"></i>Tese</span></div>
+        <div class="df-chart" id="chart-mes" data-draw="chart" data-chart="mes" data-source="defesas"></div>
+      </article>
+
+      <article class="df-card" id="card-ingles">
+        <h2>Títulos em inglês por ano</h2>
+        <p class="df-note">Percentual de títulos classificados como inglês (classificação automática, aproximada).</p>
+        <div class="df-chart" id="chart-ingles" data-draw="chart" data-chart="ingles" data-source="defesas"></div>
+      </article>
+
+      <article class="df-card" id="card-orient">
+        <h2>Orientadores com mais defesas</h2>
+        <p class="df-note">Top 15. Clique num nome para filtrar por ele.</p>
+        <div class="df-leg"><span><i class="df-sw df-sw-d"></i>Dissertação</span><span><i class="df-sw df-sw-t"></i>Tese</span></div>
+        <div class="df-hb" id="hb-orient" data-draw="hbar" data-hbar="orient" data-source="defesas"></div>
+      </article>
+
+      <article class="df-card" id="card-membros">
+        <h2>Quem mais participa de bancas</h2>
+        <p class="df-note">Top 15 participações, sem contar o orientador da própria defesa.</p>
+        <div class="df-hb" id="hb-membros" data-draw="hbar" data-hbar="membros" data-source="defesas"></div>
+      </article>
+
+      <article class="df-card" id="card-palavras">
+        <h2>Palavras mais frequentes nos títulos</h2>
+        <p class="df-note">Top 20, sem artigos e preposições em português e inglês.</p>
+        <div class="df-hb" id="hb-palavras" data-draw="hbar" data-hbar="palavras" data-source="defesas"></div>
+      </article>
+
+      <article class="df-card df-wide" id="card-indicadores">
+        <h2>Indicadores por ano</h2>
+        <div class="df-tab-wrap">
+          <table class="df-st">
+            <thead><tr><th>Ano</th><th class="n">Defesas</th><th class="n">Dissertações</th><th class="n">Teses</th><th class="n">Orientadores</th><th class="n">Banca (média)</th><th class="n">Palavras no resumo (média)</th><th class="n">Títulos em inglês</th></tr></thead>
+            <tbody data-draw="tab" data-tab="anos" data-source="defesas"></tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="df-card" id="card-tipo">
+        <h2>Banca e resumo por tipo</h2>
+        <p class="df-note">Tamanho da banca em membros e do resumo em palavras.</p>
+        <div class="df-tab-wrap">
+          <table class="df-st">
+            <thead><tr><th>Tipo</th><th class="n">Defesas</th><th class="n">Banca média</th><th class="n">Banca mín.–máx.</th><th class="n">Resumo médio</th><th class="n">Resumo mín.–máx.</th></tr></thead>
+            <tbody data-draw="tab" data-tab="tipo" data-source="defesas"></tbody>
+          </table>
+        </div>
+        <p class="df-note">O orientador consta na banca em <b data-draw="kpi" data-kpi="orbanca" data-source="defesas">—</b> das defesas.</p>
+      </article>
+
+      <article class="df-card" id="card-qualidade">
+        <h2>Qualidade dos dados</h2>
+        <p class="df-note">Campos preenchidos no recorte. O link da ata só existe quando a defesa a publicou no SIGAA.</p>
+        <div class="df-tab-wrap">
+          <table class="df-st">
+            <thead><tr><th>Campo</th><th class="n">Preenchidos</th><th class="n">Vazios</th><th class="n">% preenchido</th></tr></thead>
+            <tbody data-draw="tab" data-tab="qualidade" data-source="defesas"></tbody>
+          </table>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="df-page" id="lista" data-pagina="lista" aria-labelledby="tab-lista" hidden>
+    <div class="df-busca">
+      <input class="df-search" id="busca" type="search" placeholder="Pesquisar por nome do discente, orientador, banca ou título" aria-label="Pesquisar">
+      <span class="df-count"><b data-draw="lista-n" data-source="defesas">—</b> defesas · clique numa linha para ver o resumo e o abstract</span>
+    </div>
+    <div class="df-lista" id="lista-defesas" data-draw="lista" data-source="defesas"></div>
+  </section>
+</div>
+
+<script>
+  // Ajudantes compartilhados: filtros, formatação e leitura das linhas.
+  const STOP = new Set(('a o e de da do das dos em no na nos nas um uma uns umas para por com sem sobre entre ao aos à às que se seu sua seus suas como mais ou ' +
+    'baseado baseada baseados baseadas uso utilizando usando partir através meio via estudo abordagem análise caso proposta ' +
+    'the of and in for to on an with from by using based towards toward its at into approach study analysis case proposal').split(' '));
+  const nf = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 1 });
+  const nf0 = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 0 });
+  const pf = new Intl.NumberFormat('pt-BR', { style: 'percent', maximumFractionDigits: 0 });
+  const pf1 = new Intl.NumberFormat('pt-BR', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  const MESES = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+  const lista = (v) => Array.isArray(v) ? v : (typeof v === 'string' && v.startsWith('[') ? JSON.parse(v) : []);
+  const norm = (s) => String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+
+  function todas() {
+    const g = dash.data('defesas');
+    if (g.status !== 'ok') return null;
+    return g.data.map((r) => ({
+      ...r,
+      ano: Number(r.ano), mes: Number(r.mes), tam_banca: Number(r.tam_banca), palavras_resumo: Number(r.palavras_resumo),
+      membros: lista(r.membros), orientador_na_banca: r.orientador_na_banca === true || r.orientador_na_banca === 'true',
+    }));
+  }
+  function filtradas() {
+    const t = todas();
+    if (!t) return null;
+    const p = dash.params();
+    return t.filter((r) => (!p.ano || String(r.ano) === String(p.ano)) && (!p.tipo || r.tipo === p.tipo) && (!p.orientador || r.orientador === p.orientador));
+  }
+  function cores() {
+    const c = dash.colors || [];
+    return [c[0] || '#2a78d6', c[1] || '#eb6834'];
+  }
+  function tooltip(box) {
+    let tt = box.querySelector(':scope > .df-tt');
+    if (!tt) { tt = document.createElement('div'); tt.className = 'df-tt'; tt.hidden = true; box.appendChild(tt); }
+    return {
+      show(ev, titulo, linhas) {
+        tt.replaceChildren();
+        const h = document.createElement('div'); h.className = 'h'; h.textContent = titulo; tt.appendChild(h);
+        linhas.forEach(([cor, nome, val]) => {
+          const r = document.createElement('div'); r.className = 'r';
+          if (cor) { const s = document.createElement('i'); s.className = 'df-sw'; s.style.background = cor; r.appendChild(s); }
+          const t = document.createElement('span'); t.textContent = nome ? `${nome}: ${val}` : val; r.appendChild(t);
+          tt.appendChild(r);
+        });
+        tt.hidden = false;
+        const b = box.getBoundingClientRect();
+        const w = tt.offsetWidth, hgt = tt.offsetHeight;
+        let x = ev.clientX - b.left + 12, y = ev.clientY - b.top - hgt - 10;
+        if (x + w > b.width) x = Math.max(0, ev.clientX - b.left - w - 12);
+        if (y < 0) y = ev.clientY - b.top + 14;
+        tt.style.left = x + 'px'; tt.style.top = y + 'px';
+      },
+      hide() { tt.hidden = true; },
+    };
+  }
+  window.DF = { STOP, nf, nf0, pf, pf1, MESES, norm, todas, filtradas, cores, tooltip };
+</script>
+
+<script>
+  // Filtros e abas (fora das drawings só ouvimos eventos e ajustamos value/hidden/aria).
+  document.querySelectorAll('#f-tipo').forEach((sel) => sel.addEventListener('change', () => dash.setParams({ tipo: sel.value || null })));
+  document.querySelectorAll('#f-limpar').forEach((b) => b.addEventListener('click', () => dash.resetParams()));
+  dash.onData(() => {
+    document.querySelectorAll('#f-tipo').forEach((sel) => { sel.value = dash.params().tipo || ''; });
+    const [c1, c2] = DF.cores();
+    document.querySelectorAll('.df').forEach((d) => { d.style.setProperty('--df-c1', c1); d.style.setProperty('--df-c2', c2); });
+  });
+
+  const abrirAba = (nome, link) => {
+    document.querySelectorAll('[data-pagina]').forEach((s) => { s.hidden = s.dataset.pagina !== nome; });
+    document.querySelectorAll('.df-tab').forEach((t) => t.setAttribute('aria-selected', String(t.dataset.aba === nome)));
+    if (link) dash.setLink(nome);
+  };
+  document.querySelectorAll('.df-tab').forEach((t) => t.addEventListener('click', () => abrirAba(t.dataset.aba, true)));
+  const inicial = location.hash.slice(1);
+  if (inicial === 'lista' || inicial === 'visao-geral') abrirAba(inicial, false);
+
+  document.querySelectorAll('#busca').forEach((inp) => inp.addEventListener('input', () => {
+    window.DF_BUSCA = inp.value;
+    dash.draw('lista');
+    dash.draw('lista-n');
+  }));
+</script>
+
+<script>
+  // Escolhas dos filtros que vêm dos dados.
+  dash.draw('opt-ano', (sel) => {
+    const t = DF.todas();
+    if (!t) { sel.replaceChildren(); return; }
+    const anos = [...new Set(t.map((r) => r.ano))].sort((a, b) => b - a);
+    sel.replaceChildren(new Option('Todos', ''), ...anos.map((a) => new Option(String(a), String(a))));
+    sel.value = dash.params().ano ? String(dash.params().ano) : '';
+    sel.onchange = () => dash.setParams({ ano: sel.value || null });
+  });
+  dash.draw('opt-or', (sel) => {
+    const t = DF.todas();
+    if (!t) { sel.replaceChildren(); return; }
+    const cont = d3.rollup(t, (v) => v.length, (r) => r.orientador);
+    const nomes = [...cont.keys()].sort((a, b) => a.localeCompare(b, 'pt-BR'));
+    sel.replaceChildren(new Option('Todos', ''), ...nomes.map((n) => new Option(`${n} (${cont.get(n)})`, n)));
+    sel.value = dash.params().orientador || '';
+    sel.onchange = () => dash.setParams({ orientador: sel.value || null });
+  });
+
+  // Frase do recorte no topo.
+  dash.draw('recorte', (el) => {
+    const t = DF.todas(), f = DF.filtradas();
+    if (!t) { el.textContent = '—'; return; }
+    const p = dash.params();
+    const partes = [p.ano, p.tipo, p.orientador].filter(Boolean);
+    const hoje = new Date().toISOString().slice(0, 10);
+    const agendadas = f.filter((r) => r.data_iso > hoje).length;
+    let txt = partes.length
+      ? `Mostrando ${DF.nf0.format(f.length)} de ${DF.nf0.format(t.length)} defesas (${partes.join(' · ')}).`
+      : `Mostrando todas as ${DF.nf0.format(t.length)} defesas, de ${d3.min(t, (r) => r.ano)} a ${d3.max(t, (r) => r.ano)}.`;
+    if (agendadas) txt += ` ${agendadas} ${agendadas === 1 ? 'ainda está agendada' : 'ainda estão agendadas'}.`;
+    el.textContent = txt;
+  });
+
+  // Números de destaque.
+  dash.draw('kpi', (el) => {
+    const f = DF.filtradas();
+    if (!f) { el.textContent = '—'; return; }
+    const k = el.dataset.kpi;
+    if (!f.length) { el.textContent = '—'; return; }
+    const v = {
+      total: () => DF.nf0.format(f.length),
+      diss: () => DF.nf0.format(f.filter((r) => r.tipo === 'Dissertação').length),
+      teses: () => DF.nf0.format(f.filter((r) => r.tipo === 'Tese').length),
+      orient: () => DF.nf0.format(new Set(f.map((r) => r.orientador)).size),
+      banca: () => DF.nf.format(d3.mean(f, (r) => r.tam_banca)),
+      ingles: () => DF.pf.format(f.filter((r) => r.idioma_titulo === 'Inglês').length / f.length),
+      orbanca: () => DF.pf.format(f.filter((r) => r.orientador_na_banca).length / f.length),
+    }[k];
+    el.textContent = v ? v() : '—';
+  });
+</script>
+
+<script>
+  // Gráficos de colunas (por ano, por mês, inglês por ano).
+  function colunas(el, cats, series, opts) {
+    const W = Math.max(280, el.clientWidth || 600), H = 240;
+    const m = { t: 18, r: 8, b: 26, l: 34 };
+    const tot = cats.map((_, i) => d3.sum(series, (s) => s.vals[i]));
+    const vmax = opts.max ?? (d3.max(tot) || 1);
+    const y = d3.scaleLinear([0, vmax], [H - m.b, m.t]).nice(5);
+    const x = d3.scaleBand(cats.map(String), [m.l, W - m.r]).paddingInner(0.3).paddingOuter(0.15);
+    const bw = Math.min(32, x.bandwidth());
+    const svg = d3.create('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`);
+    const ticks = y.ticks(5);
+    svg.append('g').selectAll('line').data(ticks).join('line').attr('class', 'grid-l')
+      .attr('x1', m.l).attr('x2', W - m.r).attr('y1', (d) => y(d)).attr('y2', (d) => y(d));
+    svg.append('g').selectAll('text').data(ticks).join('text').attr('class', 'tick-l')
+      .attr('x', m.l - 6).attr('y', (d) => y(d) + 4).attr('text-anchor', 'end').text((d) => opts.pct ? DF.pf.format(d) : DF.nf0.format(d));
+    svg.append('line').attr('class', 'axis-l').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(0)).attr('y2', y(0));
+    const tip = DF.tooltip(el);
+    const every = Math.ceil(cats.length / Math.max(1, Math.floor((W - m.l) / 34)));
+    cats.forEach((c, i) => {
+      const g = svg.append('g').attr('class', opts.onClick ? 'df-col' : null);
+      const cx = x(String(c)) + (x.bandwidth() - bw) / 2;
+      g.append('rect').attr('x', x(String(c)) - 2).attr('y', m.t).attr('width', x.bandwidth() + 4).attr('height', H - m.b - m.t).attr('fill', 'transparent');
+      let base = y(0);
+      const visiveis = series.filter((s) => s.vals[i] > 0);
+      series.forEach((s) => {
+        const v = s.vals[i];
+        if (!v) return;
+        const top = y(v) - y(0) + base;
+        const h = Math.max(1, base - top - (s === visiveis[0] ? 0 : 2));
+        const ultimo = s === visiveis[visiveis.length - 1];
+        const r = ultimo ? Math.min(4, bw / 2, h) : 0;
+        const yy = base - h - (s === visiveis[0] ? 0 : 2);
+        g.append('path').attr('class', 'df-seg').attr('fill', s.cor)
+          .attr('d', `M${cx},${yy + h} V${yy + r} Q${cx},${yy} ${cx + r},${yy} H${cx + bw - r} Q${cx + bw},${yy} ${cx + bw},${yy + r} V${yy + h} Z`);
+        base = top;
+      });
+      if (tot[i] > 0) {
+        g.append('text').attr('class', 'val-l').attr('x', cx + bw / 2).attr('y', y(tot[i]) - 5).attr('text-anchor', 'middle')
+          .text(opts.pct ? DF.pf.format(tot[i]) : DF.nf0.format(tot[i]));
+      }
+      if (i % every === 0) {
+        g.append('text').attr('class', 'tick-l').attr('x', cx + bw / 2).attr('y', H - 8).attr('text-anchor', 'middle').text(opts.label ? opts.label(c) : c);
+      }
+      g.on('mousemove', (ev) => tip.show(ev, opts.label ? opts.label(c) : String(c), opts.tip(i)))
+        .on('mouseleave', () => tip.hide());
+      if (opts.onClick) g.on('click', () => opts.onClick(c));
+    });
+    el.querySelectorAll(':scope > svg').forEach((s) => s.remove());
+    el.prepend(svg.node());
+  }
+
+  dash.draw('chart', (el) => {
+    const f = DF.filtradas();
+    if (!f) { el.replaceChildren(); return; }
+    const [c1, c2] = DF.cores();
+    const k = el.dataset.chart;
+    if (!f.length) { el.replaceChildren(); return; }
+    if (k === 'ano' || k === 'ingles') {
+      const t = DF.todas();
+      const p = dash.params();
+      const anos = p.ano ? [Number(p.ano)] : d3.range(d3.min(t, (r) => r.ano), d3.max(t, (r) => r.ano) + 1);
+      if (k === 'ano') {
+        const conta = (tipo) => anos.map((a) => f.filter((r) => r.ano === a && r.tipo === tipo).length);
+        const d = conta('Dissertação'), te = conta('Tese');
+        colunas(el, anos, [{ cor: c1, vals: d }, { cor: c2, vals: te }], {
+          tip: (i) => [[c1, 'Dissertações', d[i]], [c2, 'Teses', te[i]], [null, 'Total', d[i] + te[i]]],
+          onClick: (a) => dash.setParams({ ano: String(a) }),
+        });
+      } else {
+        const pct = anos.map((a) => { const v = f.filter((r) => r.ano === a); return v.length ? v.filter((r) => r.idioma_titulo === 'Inglês').length / v.length : 0; });
+        const n = anos.map((a) => f.filter((r) => r.ano === a).length);
+        colunas(el, anos, [{ cor: c1, vals: pct }], {
+          pct: true, max: Math.max(0.1, d3.max(pct)),
+          tip: (i) => [[null, null, `${DF.pf.format(pct[i])} de ${n[i]} títulos`]],
+        });
+      }
+    } else if (k === 'mes') {
+      const meses = d3.range(1, 13);
+      const conta = (tipo) => meses.map((m) => f.filter((r) => r.mes === m && r.tipo === tipo).length);
+      const d = conta('Dissertação'), te = conta('Tese');
+      colunas(el, meses, [{ cor: c1, vals: d }, { cor: c2, vals: te }], {
+        label: (m) => DF.MESES[m - 1],
+        tip: (i) => [[c1, 'Dissertações', d[i]], [c2, 'Teses', te[i]], [null, 'Total', d[i] + te[i]]],
+      });
+    }
+  });
+</script>
+
+<script>
+  // Barras horizontais (orientadores, bancas, palavras).
+  dash.draw('hbar', (el) => {
+    const f = DF.filtradas();
+    el.replaceChildren();
+    if (!f) return;
+    const [c1, c2] = DF.cores();
+    const k = el.dataset.hbar;
+    let itens = [];
+    if (k === 'orient') {
+      const g = d3.rollups(f, (v) => [v.filter((r) => r.tipo === 'Dissertação').length, v.filter((r) => r.tipo === 'Tese').length], (r) => r.orientador);
+      itens = g.map(([nome, [d, t]]) => ({ nome, vals: [d, t], total: d + t }))
+        .sort((a, b) => b.total - a.total || b.vals[1] - a.vals[1] || a.nome.localeCompare(b.nome, 'pt-BR')).slice(0, 15);
+    } else if (k === 'membros') {
+      const c = new Map();
+      f.forEach((r) => r.membros.forEach((m) => c.set(m, (c.get(m) || 0) + 1)));
+      itens = [...c].map(([nome, n]) => ({ nome, vals: [n], total: n }))
+        .sort((a, b) => b.total - a.total || a.nome.localeCompare(b.nome, 'pt-BR')).slice(0, 15);
+    } else if (k === 'palavras') {
+      const c = new Map();
+      f.forEach((r) => (String(r.titulo).toLowerCase().match(/[a-zà-ú0-9-]+/g) || [])
+        .forEach((p) => { if (p.length > 2 && !DF.STOP.has(p)) c.set(p, (c.get(p) || 0) + 1); }));
+      itens = [...c].map(([nome, n]) => ({ nome, vals: [n], total: n }))
+        .sort((a, b) => b.total - a.total || a.nome.localeCompare(b.nome, 'pt-BR')).slice(0, 20);
+    }
+    if (!itens.length) return;
+    const vmax = d3.max(itens, (i) => i.total);
+    const tip = DF.tooltip(el);
+    const corDe = (j) => (k === 'orient' ? [c1, c2][j] : c1);
+    itens.forEach((it) => {
+      const row = document.createElement('div');
+      row.className = 'df-hb-row' + (k === 'orient' ? ' df-click' : '');
+      const l = document.createElement('span'); l.className = 'df-hb-l'; l.textContent = it.nome;
+      const tr = document.createElement('span'); tr.className = 'df-hb-track';
+      it.vals.forEach((v, j) => {
+        if (!v) return;
+        const s = document.createElement('span'); s.className = 'df-hb-seg';
+        s.style.width = `calc(${(v / vmax) * 100}% - 2px)`; s.style.background = corDe(j);
+        tr.appendChild(s);
+      });
+      const val = document.createElement('span'); val.className = 'df-hb-v'; val.textContent = DF.nf0.format(it.total);
+      row.append(l, tr, val);
+      row.addEventListener('mousemove', (ev) => tip.show(ev, it.nome, k === 'orient'
+        ? [[c1, 'Dissertações', it.vals[0]], [c2, 'Teses', it.vals[1]], [null, 'Total', it.total]]
+        : [[null, null, k === 'membros' ? `${it.total} participações em bancas` : `${it.total} títulos`]]));
+      row.addEventListener('mouseleave', () => tip.hide());
+      if (k === 'orient') row.addEventListener('click', () => dash.setParams({ orientador: it.nome }));
+      el.appendChild(row);
+    });
+  });
+</script>
+
+<script>
+  // Tabelas de resumo.
+  dash.draw('tab', (tb) => {
+    const f = DF.filtradas();
+    tb.replaceChildren();
+    if (!f || !f.length) return;
+    const linha = (cels) => {
+      const tr = document.createElement('tr');
+      cels.forEach(([txt, num]) => { const td = document.createElement('td'); td.textContent = txt; if (num) td.className = 'n'; tr.appendChild(td); });
+      tb.appendChild(tr);
+    };
+    const k = tb.dataset.tab;
+    if (k === 'anos') {
+      d3.groups(f, (r) => r.ano).sort((a, b) => b[0] - a[0]).forEach(([ano, v]) => linha([
+        [String(ano)], [DF.nf0.format(v.length), 1],
+        [DF.nf0.format(v.filter((r) => r.tipo === 'Dissertação').length), 1],
+        [DF.nf0.format(v.filter((r) => r.tipo === 'Tese').length), 1],
+        [DF.nf0.format(new Set(v.map((r) => r.orientador)).size), 1],
+        [DF.nf.format(d3.mean(v, (r) => r.tam_banca)), 1],
+        [DF.nf0.format(d3.mean(v, (r) => r.palavras_resumo)), 1],
+        [DF.pf.format(v.filter((r) => r.idioma_titulo === 'Inglês').length / v.length), 1],
+      ]));
+    } else if (k === 'tipo') {
+      ['Dissertação', 'Tese'].forEach((tipo) => {
+        const v = f.filter((r) => r.tipo === tipo);
+        if (!v.length) return;
+        linha([
+          [tipo === 'Tese' ? 'Teses' : 'Dissertações'], [DF.nf0.format(v.length), 1],
+          [DF.nf.format(d3.mean(v, (r) => r.tam_banca)), 1],
+          [`${d3.min(v, (r) => r.tam_banca)}–${d3.max(v, (r) => r.tam_banca)}`, 1],
+          [DF.nf0.format(d3.mean(v, (r) => r.palavras_resumo)), 1],
+          [`${d3.min(v, (r) => r.palavras_resumo)}–${d3.max(v, (r) => r.palavras_resumo)}`, 1],
+        ]);
+      });
+    } else if (k === 'qualidade') {
+      [['Discente', 'discente'], ['Título', 'titulo'], ['Orientador', 'orientador'], ['Banca', 'banca'], ['Data', 'data'],
+        ['Resumo (português)', 'resumo'], ['Abstract (inglês)', 'abstract'], ['Link da ata assinada', 'ata_url']].forEach(([rot, campo]) => {
+        const ok = f.filter((r) => String(r[campo] ?? '').trim() !== '').length;
+        linha([[rot], [DF.nf0.format(ok), 1], [DF.nf0.format(f.length - ok), 1], [DF.pf1.format(ok / f.length), 1]]);
+      });
+    }
+  });
+</script>
+
+<script>
+  // Aba de lista: busca, ordenação e detalhe com resumo e abstract.
+  const COLS = [
+    { campo: 'data', rot: 'Data', cls: 'c-data', chave: (r) => r.data_iso },
+    { campo: 'tipo', rot: 'Tipo', cls: 'c-tipo', chave: (r) => r.tipo },
+    { campo: 'discente', rot: 'Discente', cls: 'c-disc', chave: (r) => DF.norm(r.discente) },
+    { campo: 'titulo', rot: 'Título', cls: 'c-tit', chave: (r) => DF.norm(r.titulo) },
+    { campo: 'orientador', rot: 'Orientador', cls: 'c-or', chave: (r) => DF.norm(r.orientador) },
+  ];
+  let ordem = { campo: 'data', dir: -1 };
+  let aberta = null;
+
+  function visiveis() {
+    const f = DF.filtradas();
+    if (!f) return null;
+    const q = DF.norm(window.DF_BUSCA || '').trim();
+    const termos = q ? q.split(/\s+/) : [];
+    return f.filter((r) => {
+      if (!termos.length) return true;
+      const alvo = DF.norm([r.discente, r.orientador, r.banca, r.titulo].join(' '));
+      return termos.every((t) => alvo.includes(t));
+    });
+  }
+
+  dash.draw('lista-n', (el) => {
+    const v = visiveis();
+    el.textContent = v ? DF.nf0.format(v.length) : '—';
+  });
+
+  dash.draw('lista', (box) => {
+    const v = visiveis();
+    box.replaceChildren();
+    if (!v) return;
+    const col = COLS.find((c) => c.campo === ordem.campo);
+    v.sort((a, b) => { const x = col.chave(a), y = col.chave(b); return (x < y ? -1 : x > y ? 1 : 0) * ordem.dir || (a.data_iso < b.data_iso ? 1 : -1); });
+
+    const scroll = document.createElement('div'); scroll.className = 'df-scroll';
+    const table = document.createElement('table'); table.className = 'df-tl';
+    table.setAttribute('data-source', 'defesas'); table.setAttribute('data-row-key', 'id');
+    const thead = table.createTHead(); const hr = thead.insertRow();
+    COLS.forEach((c) => {
+      const th = document.createElement('th'); th.className = c.cls; th.setAttribute('data-field', c.campo); th.scope = 'col';
+      if (ordem.campo === c.campo) th.setAttribute('aria-sort', ordem.dir === 1 ? 'ascending' : 'descending');
+      const b = document.createElement('button'); b.type = 'button';
+      b.textContent = c.rot + (ordem.campo === c.campo ? (ordem.dir === 1 ? ' ↑' : ' ↓') : '');
+      b.addEventListener('click', () => { ordem = { campo: c.campo, dir: ordem.campo === c.campo ? -ordem.dir : (c.campo === 'data' ? -1 : 1) }; dash.draw('lista'); });
+      th.appendChild(b); hr.appendChild(th);
+    });
+    const tb = table.createTBody();
+    v.forEach((r) => {
+      const tr = tb.insertRow(); tr.dataset.key = r.id; tr.tabIndex = 0;
+      if (aberta === r.id) tr.className = 'on';
+      COLS.forEach((c) => {
+        const td = tr.insertCell(); td.className = c.cls;
+        if (c.campo === 'tipo') { const s = document.createElement('span'); s.className = 'df-pill ' + (r.tipo === 'Tese' ? 't' : 'd'); s.textContent = r.tipo; td.appendChild(s); }
+        else td.textContent = r[c.campo];
+      });
+    });
+    scroll.appendChild(table);
+    box.appendChild(scroll);
+    if (!v.length) {
+      const e = document.createElement('div'); e.className = 'df-empty';
+      e.textContent = 'Nenhuma defesa encontrada com essa pesquisa e esses filtros.';
+      box.appendChild(e);
+    }
+
+    const pop = document.createElement('div'); pop.className = 'df-pop'; pop.hidden = true; pop.setAttribute('role', 'dialog'); pop.setAttribute('aria-label', 'Resumo da defesa');
+    box.appendChild(pop);
+    const fechar = () => { pop.hidden = true; aberta = null; tb.querySelectorAll('tr.on').forEach((t) => t.classList.remove('on')); };
+    const abrir = (tr) => {
+      const r = v.find((x) => x.id === tr.dataset.key);
+      if (!r) return;
+      aberta = r.id;
+      tb.querySelectorAll('tr.on').forEach((t) => t.classList.remove('on')); tr.classList.add('on');
+      pop.replaceChildren();
+      const x = document.createElement('button'); x.className = 'x'; x.type = 'button'; x.setAttribute('aria-label', 'Fechar'); x.textContent = '×';
+      x.addEventListener('click', fechar);
+      const h = document.createElement('h3'); h.textContent = r.titulo;
+      const meta = document.createElement('p'); meta.className = 'meta';
+      meta.textContent = `${r.tipo} de ${r.discente} · defendida em ${r.data}\nOrientador: ${r.orientador}\nBanca: ${r.banca}`;
+      meta.style.whiteSpace = 'pre-line';
+      pop.append(x, h, meta);
+      [['Resumo', r.resumo, 'pt-BR'], ['Abstract', r.abstract, 'en']].forEach(([rot, txt, lang]) => {
+        const h4 = document.createElement('h4'); h4.textContent = rot;
+        const p = document.createElement('p'); p.className = 'txt'; p.lang = lang;
+        p.textContent = String(txt || '').trim() || 'Não informado no SIGAA.';
+        pop.append(h4, p);
+      });
+      if (r.ata_url) {
+        const a = document.createElement('a'); a.href = r.ata_url; a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'Abrir ata assinada (PDF)';
+        const pa = document.createElement('p'); pa.className = 'meta'; pa.style.marginTop = '12px'; pa.appendChild(a); pop.appendChild(pa);
+      }
+      pop.hidden = false; pop.scrollTop = 0;
+      const b = box.getBoundingClientRect(), rr = tr.getBoundingClientRect();
+      let top = rr.bottom - b.top + 6;
+      const ph = pop.offsetHeight;
+      if (top + ph > box.offsetHeight && rr.top - b.top - ph - 6 >= 0) top = rr.top - b.top - ph - 6;
+      pop.style.top = Math.max(0, top) + 'px';
+      x.focus({ preventScroll: true });
+    };
+    tb.addEventListener('click', (ev) => { const tr = ev.target.closest('tr[data-key]'); if (tr) (aberta === tr.dataset.key ? fechar() : abrir(tr)); });
+    tb.addEventListener('keydown', (ev) => { if (ev.key === 'Enter' || ev.key === ' ') { const tr = ev.target.closest('tr[data-key]'); if (tr) { ev.preventDefault(); abrir(tr); } } });
+    pop.addEventListener('keydown', (ev) => { if (ev.key === 'Escape') fechar(); });
+    scroll.addEventListener('scroll', fechar, { passive: true });
+    if (aberta) { const tr = tb.querySelector(`tr[data-key="${CSS.escape(aberta)}"]`); if (tr) abrir(tr); else aberta = null; }
+  });
+
+  document.addEventListener('click', (ev) => {
+    if (!aberta) return;
+    if (ev.target.closest('.df-pop') || ev.target.closest('.df-tl tbody tr')) return;
+    document.querySelectorAll('.df-pop').forEach((p) => { p.hidden = true; });
+    document.querySelectorAll('.df-tl tr.on').forEach((t) => t.classList.remove('on'));
+    aberta = null;
+  });
+</script>

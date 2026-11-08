@@ -1,20 +1,31 @@
 """Análise básica das defesas (dissertações/teses) extraídas do SIGAA/UFBA.
 
-Uso: python analise_defesas.py [arquivo.csv]   (padrão: defesas_1820.csv)
-Gera relatorio_defesas.html (abre em qualquer navegador; dá para imprimir em PDF).
-Depende apenas de pandas.
+Uso (a partir da pasta principal):
+  python scripts/analise_defesas.py                     -> todos os anos, relatorios/defesas_geral.html
+  python scripts/analise_defesas.py --anos 2025 2026    -> só esses anos, relatorios/defesas_2025_2026.html
+  python scripts/analise_defesas.py --csv outro.csv     -> outro arquivo de entrada (padrão: dados/defesas_1820.csv)
+O relatório abre em qualquer navegador (dá para imprimir em PDF). Depende apenas de pandas.
 """
+import argparse
 import html
 import re
 import sys
 import unicodedata
 from collections import Counter
 from datetime import date
+from pathlib import Path
 
 import pandas as pd
 
-ARQ = sys.argv[1] if len(sys.argv) > 1 else "defesas_1820.csv"
-SAIDA = "relatorio_defesas.html"
+RAIZ = Path(__file__).resolve().parent.parent  # pasta principal do repositório
+_ap = argparse.ArgumentParser(description="Análise das defesas do SIGAA/UFBA")
+_ap.add_argument("--csv", default=str(RAIZ / "dados" / "defesas_1820.csv"), help="arquivo CSV gerado pelo scrape_defesas.py")
+_ap.add_argument("--anos", type=int, nargs="+", help="anos a incluir (ex.: --anos 2025 2026)")
+ARGS = _ap.parse_args()
+ARQ = ARGS.csv
+FILTRO = sorted(ARGS.anos) if ARGS.anos else None
+(RAIZ / "relatorios").mkdir(exist_ok=True)
+SAIDA = str(RAIZ / "relatorios" / ("defesas_" + ("_".join(map(str, FILTRO)) if FILTRO else "geral") + ".html"))
 TIPOS = ["Dissertações", "Teses"]
 MESES = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
 
@@ -64,7 +75,7 @@ def svg_colunas_empilhadas(categorias, series, nomes, largura=720, altura=280):
     w, h = largura - ml - mr, altura - mt - mb
     totais = [sum(s[i] for s in series) for i in range(len(categorias))]
     vmax = max(totais) or 1
-    passo = 10 if vmax <= 60 else 20
+    passo = 2 if vmax <= 12 else 5 if vmax <= 30 else 10 if vmax <= 60 else 20
     topo = ((vmax // passo) + 1) * passo
     bw = w / len(categorias)
     barra = min(38, bw * 0.62)
@@ -133,6 +144,11 @@ def tabela(df, idx=False):
 def main():
     d = pd.read_csv(ARQ, sep=";", encoding="utf-8-sig", dtype=str).fillna("")
     d["Ano"] = d["Ano"].astype(int)
+    total_geral = len(d)
+    if FILTRO:
+        d = d[d["Ano"].isin(FILTRO)].copy()
+        if d.empty:
+            sys.exit(f"Nenhuma defesa nos anos {FILTRO}.")
     d["Data_dt"] = pd.to_datetime(d["Data"], format="%d/%m/%Y", errors="coerce")
     d["Mes"] = d["Data_dt"].dt.month
     d["Orient_key"] = d["Orientador"].map(chave_nome)
@@ -145,12 +161,13 @@ def main():
     n_tipo = d["Tipo"].value_counts()
     anos = list(range(d["Ano"].min(), d["Ano"].max() + 1))
     ano_min, ano_max = anos[0], anos[-1]
-    anos_completos = [a for a in anos if a not in (ano_min,)]  # 1º ano tem só 1 defesa
-
     # 1. por ano e tipo
     pivo = (d.pivot_table(index="Ano", columns="Tipo", values="Discente", aggfunc="count")
               .reindex(index=anos, columns=TIPOS).fillna(0).astype(int))
     pivo["Total"] = pivo.sum(axis=1)
+    # anos com movimento atípico (< 5 defesas, ex.: 1º ano do programa) ficam fora da média
+    anos_completos = [a for a in anos if pivo.loc[a, "Total"] >= 5] or anos
+    anos_fora = [a for a in anos if a not in anos_completos]
     ano_pico = int(pivo["Total"].idxmax())
     media_ano = pivo.loc[anos_completos, "Total"].mean()
     graf_ano = svg_colunas_empilhadas([str(a) for a in anos],
@@ -232,6 +249,59 @@ def main():
         "% preenchido": [f"{(total - v) / total * 100:.1f}%".replace(".", ",") for v in vazios.values()],
     })
 
+    # texto sobre a evolução anual
+    if len(anos) == 1:
+        txt_anos = f"Todas as defesas analisadas são de <b>{ano_min}</b>."
+    else:
+        txt_anos = f"O ano com mais defesas foi <b>{ano_pico}</b> ({pivo.loc[ano_pico, 'Total']})."
+        if len(anos) == 2:
+            a, b = anos
+            ta, tb = pivo.loc[a, "Total"], pivo.loc[b, "Total"]
+            var = (tb - ta) / ta * 100 if ta else 0
+            txt_anos = (f"Foram <b>{ta}</b> defesas em {a} e <b>{tb}</b> em {b} "
+                        f"({'+' if var >= 0 else ''}{var:.0f}%). "
+                        f"Teses: {pivo.loc[a, 'Teses']} → {pivo.loc[b, 'Teses']}; "
+                        f"dissertações: {pivo.loc[a, 'Dissertações']} → {pivo.loc[b, 'Dissertações']}.")
+        if anos_fora:
+            txt_anos += (f" {', '.join(map(str, anos_fora))} teve menos de 5 defesas e ficou fora da média anual.")
+        if not FILTRO and (d.Tipo == "Teses").any():
+            txt_anos += f" As teses aparecem a partir de {int(d[d.Tipo == 'Teses']['Ano'].min())}."
+    if ano_max == date.today().year:
+        txt_anos += f" {ano_max} considera só as defesas publicadas até a coleta."
+    futuras = int((d["Data_dt"] > pd.Timestamp(date.today())).sum())
+    if futuras:
+        txt_anos += (f" {futuras} {'defesa ainda está agendada' if futuras == 1 else 'defesas ainda estão agendadas'}"
+                     f" (data posterior a {date.today():%d/%m/%Y}).")
+    periodo = f"{ano_min}–{ano_max}" if ano_min != ano_max else str(ano_min)
+    recorte = (f"Recorte: {', '.join(map(str, FILTRO))} — {total} de {total_geral} defesas do arquivo."
+               if FILTRO else "")
+
+    # indicadores por ano
+    ind = d.groupby("Ano").agg(
+        Defesas=("Discente", "count"),
+        Teses=("Tipo", lambda s: int((s == "Teses").sum())),
+        Orientadores=("Orient_key", "nunique"),
+        Banca_media=("Tam_banca", "mean"),
+        Pal_resumo=("Palavras_resumo", "mean"),
+        Pct_ingles=("Idioma_titulo", lambda s: (s == "Inglês").mean() * 100),
+    ).reindex(anos)
+    ind = ind.reset_index().rename(columns={
+        "Banca_media": "Banca (média)", "Pal_resumo": "Palavras no resumo (média)",
+        "Pct_ingles": "% títulos em inglês"})
+    ind["Banca (média)"] = ind["Banca (média)"].round(1)
+    ind["Palavras no resumo (média)"] = ind["Palavras no resumo (média)"].round(0).astype("Int64")
+    ind["% títulos em inglês"] = ind["% títulos em inglês"].round(0).astype("Int64").astype(str) + "%"
+
+    # lista das defesas (só quando o recorte é pequeno)
+    lista_html = ""
+    if len(d) <= 120:
+        lst = d.sort_values("Data_dt")[["Data", "Tipo", "Discente", "Título", "Orientador"]].copy()
+        lst["Tipo"] = lst["Tipo"].map({"Dissertações": "Dissertação", "Teses": "Tese"})
+        lst["Discente"] = lst["Discente"].map(nome_bonito)
+        lst["Orientador"] = lst["Orientador"].map(nome_bonito)
+        lista_html = (f'<section><h2>9. Lista das defesas ({len(lst)})</h2>'
+                      f'<p class="nota">Em ordem de data.</p>{tabela(lst)}</section>')
+
     tiles = [
         (total, "defesas no total"),
         (int(n_tipo.get("Dissertações", 0)), "dissertações"),
@@ -246,9 +316,10 @@ def main():
 
     corpo = f"""
 <header>
-  <h1>Defesas de pós-graduação — análise básica</h1>
-  <p class="sub">Fonte: SIGAA/UFBA, página pública de defesas do programa (id 1820) · arquivo <code>{esc(ARQ)}</code>
-  · {total} registros, {ano_min}–{ano_max} · gerado em {date.today():%d/%m/%Y}</p>
+  <h1>Defesas de pós-graduação — análise {periodo}</h1>
+  <p class="sub">Fonte: SIGAA/UFBA, página pública de defesas do programa (id 1820) · arquivo <code>{esc(Path(ARQ).name)}</code>
+  · {total} registros, {periodo} · gerado em {date.today():%d/%m/%Y}</p>
+  {f'<p class="sub"><b>{esc(recorte)}</b></p>' if recorte else ''}
 </header>
 
 <div class="tiles">{tiles_html}</div>
@@ -256,13 +327,11 @@ def main():
 <section>
 <h2>1. Destaques</h2>
 <ul class="dest">
-  <li>O programa registra <b>{total}</b> defesas: <b>{n_tipo.get('Dissertações', 0)}</b> dissertações
+  <li>{'No período, o' if FILTRO else 'O'} programa registra <b>{total}</b> defesas: <b>{n_tipo.get('Dissertações', 0)}</b> dissertações
       ({n_tipo.get('Dissertações', 0) / total * 100:.0f}%) e <b>{n_tipo.get('Teses', 0)}</b> teses
       ({n_tipo.get('Teses', 0) / total * 100:.0f}%).</li>
-  <li>O ano com mais defesas foi <b>{ano_pico}</b> ({pivo.loc[ano_pico, 'Total']}). {ano_min} tem só
-      {pivo.loc[ano_min, 'Total']} defesa, por isso ficou fora da média anual.
-      As teses aparecem a partir de {int(d[d.Tipo == 'Teses']['Ano'].min())}.</li>
-  <li><b>{mes_pico}</b> é o mês com mais defesas ({por_mes.max()}), acompanhando o fim de semestre.</li>
+  <li>{txt_anos}</li>
+  <li><b>{mes_pico}</b> é o mês com mais defesas ({por_mes.max()}).</li>
   <li>Os 5 orientadores mais ativos respondem por <b>{top5_share:.0f}%</b> das defesas;
       {orient_1} dos {n_orient} orientadores aparecem em uma única defesa.</li>
   <li>Em média, a banca tem <b>{banca_tipo.loc['Dissertações', 'mean']:.1f}</b> membros nas dissertações e
@@ -276,7 +345,8 @@ def main():
 <h2>2. Defesas por ano</h2>
 {legenda}{graf_ano}
 <details><summary>Ver tabela</summary>{tabela(t_ano)}</details>
-<p class="nota">{ano_max} considera as defesas publicadas até a data da coleta.</p>
+<h3>Indicadores por ano</h3>
+{tabela(ind)}
 </section>
 
 <section>
@@ -298,7 +368,8 @@ def main():
 <h3>Membros que mais participam de bancas (top 15, sem contar o próprio orientador)</h3>
 {graf_mem}
 <p class="nota">{n_membros} pessoas diferentes participaram de bancas como não orientadoras;
-{externos} delas nunca aparecem como orientadoras no programa, o que indica participação externa.</p>
+{externos} delas não aparecem como orientadoras {'no período analisado' if FILTRO else 'no programa'},
+o que sugere participação externa.</p>
 </section>
 
 <section>
@@ -322,6 +393,7 @@ def main():
 O link da ata assinada só existe nas defesas que o publicaram no SIGAA. Nomes foram agrupados
 sem acento e sem diferença de maiúsculas, porque o sistema usa grafias diferentes para a mesma pessoa.</p>
 </section>
+{lista_html}
 """
     with open(SAIDA, "w", encoding="utf-8") as f:
         f.write(PAGINA.replace("{{CORPO}}", corpo))

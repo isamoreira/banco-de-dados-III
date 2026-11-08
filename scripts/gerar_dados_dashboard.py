@@ -1,7 +1,7 @@
 """Prepara o arquivo de dados do dashboard a partir do CSV do scraping.
 
-Uso: python gerar_dados_dashboard.py [defesas_1820.csv]
-Gera defesas_dashboard.json: uma linha por defesa, com nomes padronizados
+Uso (a partir da pasta principal): python scripts/gerar_dados_dashboard.py [csv]   (padrão: dados/defesas_1820.csv)
+Gera defesas_dashboard.json na pasta principal (ao lado do dashboard.html): uma linha por defesa, com nomes padronizados
 (mesma pessoa escrita de formas diferentes vira um nome só) e campos auxiliares.
 """
 import json
@@ -9,11 +9,13 @@ import re
 import sys
 import unicodedata
 from collections import Counter
+from pathlib import Path
 
 import pandas as pd
 
-ARQ = sys.argv[1] if len(sys.argv) > 1 else "defesas_1820.csv"
-SAIDA = "defesas_dashboard.json"
+RAIZ = Path(__file__).resolve().parent.parent  # pasta principal do repositório
+ARQ = sys.argv[1] if len(sys.argv) > 1 else str(RAIZ / "dados" / "defesas_1820.csv")
+SAIDA = str(RAIZ / "defesas_dashboard.json")
 
 EN_MARK = {"the", "of", "and", "for", "with", "using", "based", "towards", "an", "on", "in", "to"}
 PT_MARK = {"de", "da", "do", "para", "uma", "um", "com", "em", "dos", "das", "e", "na", "no"}

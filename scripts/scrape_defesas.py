@@ -1,18 +1,20 @@
 """Scraping das defesas (dissertações/teses) de um programa de pós-graduação no SIGAA/UFBA.
 
-Uso: python scrape_defesas.py [id_programa]   (padrão: 1820)
-Gera defesas_<id>.xlsx e defesas_<id>.csv na pasta atual.
+Uso (a partir da pasta principal): python scripts/scrape_defesas.py [id_programa]   (padrão: 1820)
+Gera dados/defesas_<id>.xlsx e dados/defesas_<id>.csv.
 """
 import codecs
 import csv
 import re
 import sys
 import urllib.request
+from pathlib import Path
 
 from bs4 import BeautifulSoup
 from openpyxl import Workbook
 from openpyxl.styles import Alignment, Font, PatternFill
 
+RAIZ = Path(__file__).resolve().parent.parent  # pasta principal do repositório
 PROG_ID = sys.argv[1] if len(sys.argv) > 1 else "1820"
 URL = f"https://sigaa.ufba.br/sigaa/public/programa/defesas.jsf?lc=pt_BR&id={PROG_ID}"
 
@@ -99,7 +101,8 @@ def extrair(html):
 
 def salvar(registros):
     cols = list(registros[0].keys())
-    base = f"defesas_{PROG_ID}"
+    (RAIZ / "dados").mkdir(exist_ok=True)
+    base = str(RAIZ / "dados" / f"defesas_{PROG_ID}")
     with open(base + ".csv", "w", newline="", encoding="utf-8-sig") as f:
         w = csv.DictWriter(f, fieldnames=cols, delimiter=";")
         w.writeheader()

@@ -111,7 +111,7 @@ HEAD = """<!doctype html>
       draw(nome, fn) { if (fn) desenhos.set(nome, fn); else rodarDesenho(nome); },
       onData(fn) { ouvintes.push(fn); try { fn(); } catch (e) { console.error(e); } },
       setLink(nome) { history.replaceState(null, '', '#' + nome); },
-      get colors() { return ehEscuro() ? ['#3987e5', '#d95926'] : ['#2a78d6', '#eb6834']; },
+      get colors() { return ehEscuro() ? ['#22a447', '#2a9fd6'] : ['#008a2e', '#0094c6']; },
       _hash() {},
       async _iniciar(url) {
         rodarTudo();

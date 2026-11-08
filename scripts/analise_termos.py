@@ -455,12 +455,13 @@ PAGINA = """<!doctype html>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Termos das Defesas</title>
 <style>
-:root{color-scheme:light;--bg:#fcfcfb;--card:#ffffff;--tx:#0b0b0b;--tx2:#52514e;--line:#dcdad4;--chip:#eef3fb;
- --s1:#2a78d6;--up:#11804f;--down:#c43c3b}
+:root{color-scheme:light;--bg:#fcfcfb;--card:#ffffff;--tx:#0b0b0b;--tx2:#52514e;--line:#dcdad4;--chip:#e3f4fa;
+ --s1:#0094c6;--up:#008a2e;--down:#d11f27}
+body::before{content:"";display:block;height:6px;background:linear-gradient(90deg,#00b22a 0 20%,#00dbfa 20% 40%,#ffef00 40% 60%,#ffab8c 60% 80%,#ff272f 80% 100%)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#1a1a19;--card:#222221;
- --tx:#f0efec;--tx2:#c3c2b7;--line:#3a3a38;--chip:#24303f;--s1:#3987e5;--up:#3fbf83;--down:#e66767}}
+ --tx:#f0efec;--tx2:#c3c2b7;--line:#3a3a38;--chip:#15303b;--s1:#2a9fd6;--up:#22a447;--down:#ff5c61}}
 :root[data-theme="dark"]{color-scheme:dark;--bg:#1a1a19;--card:#222221;--tx:#f0efec;--tx2:#c3c2b7;--line:#3a3a38;
- --chip:#24303f;--s1:#3987e5;--up:#3fbf83;--down:#e66767}
+ --chip:#15303b;--s1:#2a9fd6;--up:#22a447;--down:#ff5c61}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.6 system-ui,"Segoe UI",sans-serif}
 main{max-width:900px;margin:0 auto;padding:32px 16px 64px}

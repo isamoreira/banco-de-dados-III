@@ -9,6 +9,7 @@ Trabalho de Banco de Dados III: coleta, análise e visualização das defesas de
 | [Dashboard](https://isamoreira.github.io/banco-de-dados-III/dashboard.html) | Indicadores e gráficos com filtros por ano, tipo e orientador; lista de teses e dissertações com busca, resumo e abstract |
 | [Análise geral, 2017–2026](https://isamoreira.github.io/banco-de-dados-III/relatorios/defesas_geral.html) | Defesas por ano e mês, orientadores, bancas, temas e qualidade dos dados |
 | [Análise 2025–2026](https://isamoreira.github.io/banco-de-dados-III/relatorios/defesas_2025_2026.html) | O mesmo estudo para os dois últimos anos, com a lista das defesas |
+| [Termos dos títulos e resumos](https://isamoreira.github.io/banco-de-dados-III/relatorios/termos.html) | Termos mais usados, em alta e em baixa, e característicos de cada ano, tipo e orientador (TF-IDF) |
 | [Relatório parcial PGCOMP](https://isamoreira.github.io/banco-de-dados-III/relatorios/parcial_pgcomp.html) | Contexto do programa, CAPES, linhas de pesquisa, orientadores e ODS |
 | [Relatório parcial 2025–2026](https://isamoreira.github.io/banco-de-dados-III/relatorios/parcial_pgcomp_2025_2026.html) | Universo, classificação, produção e depósito dos trabalhos recentes |
 
@@ -26,10 +27,10 @@ Trabalho de Banco de Dados III: coleta, análise e visualização das defesas de
 
 ## Como atualizar os dados
 
-Requer Python 3 com `pandas`, `beautifulsoup4` e `openpyxl`:
+Requer Python 3 com `pandas`, `numpy`, `beautifulsoup4` e `openpyxl`:
 
 ```bash
-pip install pandas beautifulsoup4 openpyxl
+pip install pandas numpy beautifulsoup4 openpyxl
 ```
 
 Rode os comandos a partir da pasta principal do repositório, nesta ordem:
@@ -38,6 +39,7 @@ Rode os comandos a partir da pasta principal do repositório, nesta ordem:
 python scripts/scrape_defesas.py              # baixa as defesas do SIGAA -> dados/
 python scripts/analise_defesas.py             # relatório geral -> relatorios/defesas_geral.html
 python scripts/analise_defesas.py --anos 2025 2026   # recorte -> relatorios/defesas_2025_2026.html
+python scripts/analise_termos.py              # termos (TF-IDF) -> relatorios/termos.html e dados/termos_por_defesa.csv
 python scripts/gerar_dados_dashboard.py       # dados do dashboard -> defesas_dashboard.json
 python scripts/gerar_site.py                  # dashboard -> dashboard.html
 ```
